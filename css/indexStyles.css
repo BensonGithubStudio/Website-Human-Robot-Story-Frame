@@ -1,102 +1,78 @@
-/* 選取整個滾動條 */
+/* ===== Scrollbar 滾動條樣式 ===== */
 ::-webkit-scrollbar {
     width: 5px;
 }
-
-/* 滾動條的滑道部分 */
 ::-webkit-scrollbar-track {
     background: transparent;
 }
-
-/* 滾動條的滑塊部分 */
 ::-webkit-scrollbar-thumb {
     background-color: #7F7F7F;
 }
-
 ::-webkit-scrollbar-thumb:hover {
     background: #3D3D3D;
 }
 
-
+/* ===== 基本設定 ===== */
 body {
-	position: fixed;
-    font-family: Arial, sans-serif;
-	overflow-x: hidden;
+    position: fixed;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
     background-color: #000000;
     color: #333;
 }
 
+/* ===== 頁面載入 Logo 淡出動畫區塊 ===== */
 #logo {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #000000;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 1000;
-	opacity: 1;
-	transition: opacity 1.0s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 1s ease;
 }
-
 #logo.fade-out {
-	opacity: 0;
+    opacity: 0;
 }
-
 #logo img {
-	width: 175px;
-	height: auto;
+    width: 175px;
+    height: auto;
 }
 
+/* ===== Header 區塊 ===== */
 header {
     position: fixed;
     width: 100%;
-	height: 80px;
+    height: 80px;
     background-color: #000000;
     color: #fff;
     z-index: 3;
 }
 
+/* 標題左側圖示 */
 #title-image {
-	position: absolute;
-	top: 50%;
-	left: 30px;
-	transform: translateY(-50%);
-	cursor: pointer;
-	z-index: 4;
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 4;
 }
-
 #title-image img {
-	width: 55px;
-	height: auto;
+    width: 55px;
+    height: auto;
 }
 
-.video-container {
-	display: none;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-	position: relative;
-}
-
-#sub-title {
-	position: absolute;
-    top: 42%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #C8C8C8;
-    font-size: 1.2em;
-    font-weight: 1000;
-    z-index: 2;
-}
-
+/* 標題文字與下載按鈕 */
 #main-title {
-	position: absolute;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -105,215 +81,248 @@ header {
     font-weight: 1000;
     z-index: 2;
 }
-
+/*
+#sub-title {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #C8C8C8;
+    font-size: 1.2em;
+    font-weight: 1000;
+    z-index: 2;
+}*/
 #download-button {
-	position: absolute;
-	padding: 10px 20px;
+    position: absolute;
     top: 50%;
     right: 30px;
-	transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding: 10px 20px;
     background-color: #0065D0;
     color: #FFFFFF;
     border: none;
     border-radius: 15px;
     cursor: pointer;
     font-size: 0.8em;
-	font-weight: 800;
-	z-index: 4;
-	transition: background-color 0.5s ease;
+    font-weight: 800;
+    z-index: 4;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
-
 #download-button:hover {
-	background-color: #FFFFFF;
-	color: #0065D0;
+    background-color: #FFFFFF;
+    color: #0065D0;
 }
 
+/* ===== 封面影片區 ===== */
+.video-container {
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure the video covers the entire area */
-	z-index: 1;
+    object-fit: cover;
+    z-index: 1;
 }
 
+/* ===== 導覽列 ===== */
 nav {
-    position: relative; /* 相對定位 */
+    position: relative;
     width: 100%;
-	height: 100%;
-	background-color: transparent; /* Ensure the background is transparent */
-	z-index: 2;
-	display: flex; /* 將項目排列在一行 */
-	justify-content: center; /* 水平居中 `ul` */
-    align-items: center; /* 垂直居中 `ul` */
+    height: 100%;
+    background-color: transparent;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
 nav ul {
-	background-color: transparent;
-	position: relative;
     list-style-type: none;
     padding: 0;
-	
 }
-
 nav ul li {
     display: inline;
     margin: 0 15px;
 }
-
 nav ul li a {
     color: #fff;
     text-decoration: none;
     font-size: 0.8em;
-	font-weight: 800;
+    font-weight: 800;
     padding: 5px 10px;
-    background-color: transparent; /* No background color */
     border-radius: 5px;
 }
 
+/* ===== 各段內容區 ===== */
 section {
     padding: 20px;
-    margin: 20px 0;
-	margin-left: 50px;
-	margin-right: 50px;
-    /* background-color: #222222; */
+    margin: 20px 50px;
     border-radius: 25px;
 }
 
+/* 動畫進場標題與段落 */
+h2, p {
+    display: none;
+    opacity: 0;
+    transform: translateY(80px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
 h2 {
-	display: none;
     color: #FFFFFF;
     font-size: 3.5em;
-	font-weight: 1000;
-	opacity: 0; /* 起始時文字不可見 */
-    transform: translateY(80px);
-    transition: opacity 1.5s ease, transform 1.5s ease;
+    font-weight: 1000;
 }
-
-h2.visible {
-	opacity: 1;
-    transform: translateY(0);
-}
-
 p {
-	display: none;
-	color: #BFBFBF;
-	font-weight: 700;
-	opacity: 0;
-    transform: translateY(80px);
-    transition: opacity 1.5s ease, transform 1.5s ease;
+    color: #BFBFBF;
+    font-weight: 700;
 }
-
-p.visible {
-	opacity: 1;
+h2.visible, p.visible {
+    opacity: 1;
     transform: translateY(0);
+    display: block;
 }
 
+/* 了解更多連結樣式 */
 .hidden {
-	display: none;
+    display: none;
 }
-
 .link-style {
-	right: 65px;
-	width: 150px;
-	background-color: transparent;
+    right: 65px;
+    width: 150px;
+    background-color: transparent;
     cursor: pointer;
     float: right;
 }
-
 .link-style a {
     color: #BFBFBF;
     font-weight: 700;
-	text-decoration: underline;
-	display: inline-block;
-	transition: transform 0.25s ease;
+    text-decoration: underline;
+    display: inline-block;
+    transition: transform 0.25s ease;
 }
-
 .link-style a:hover {
-	transform: scale(1.2);
+    transform: scale(1.2);
 }
 
+/* ===== 圖片區塊設定 ===== */
 #scene-image {
-	padding: 20px;
-	text-align: center;
+    padding: 20px;
+    text-align: center;
 }
-
 #scene-image img {
-	margin-left: 1%;
-	margin-right: 1%;
-	width: 31%;
-	height: auto;
-	border-radius: 25px;
-	transition: transform 0.5s ease;
+    margin: 0 1%;
+    width: 31%;
+    height: auto;
+    border-radius: 25px;
+    transition: transform 0.5s ease;
 }
-
 #scene-image img:hover {
-	transform: scale(1.25);
+    transform: scale(1.25);
 }
 
+/* 人類與機器人圖片區 */
 #human-robot {
-	overflow: hidden;
-	background-color: transparent;
-	text-align: center;
-	position: relative;
-	width: 100%;
-	height: 650px;
+    overflow: hidden;
+    background-color: transparent;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: 650px;
 }
-
-#human-robot-left {
-	position: absolute;
-	bottom: 0%;
-    left: 0%;
-	width: 100%;
-	clip-path: polygon(0% 0%, 0 100%, 50.8% 100%, 53.6% 48%, 48.8% 48%, 50.8% 0%);
-	transition: transform 0.5s ease;
-}
-
-#human-robot-left:hover {
-	transform: scale(1.1);
-}
-
+#human-robot-left,
 #human-robot-right {
-	position: absolute;
-	bottom: 0%;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    transition: transform 0.5s ease;
+}
+#human-robot-left {
+    left: 0%;
+    clip-path: polygon(0% 0%, 0 100%, 50.8% 100%, 53.6% 48%, 48.8% 48%, 50.8% 0%);
+}
+#human-robot-right {
     right: 0%;
-	width: 100%;
-	clip-path: polygon(100% 0%, 100% 100%, 49.2% 100%, 51.9% 51.3%, 47% 51.3%, 49.2% 0%);
-	transition: transform 0.5s ease;
+    clip-path: polygon(100% 0%, 100% 100%, 49.2% 100%, 51.9% 51.3%, 47% 51.3%, 49.2% 0%);
 }
-
+#human-robot-left:hover,
 #human-robot-right:hover {
-	transform: scale(1.1);
+    transform: scale(1.1);
 }
 
+/* 角色展示圖 */
 #character-image {
-	overflow: hidden;
-	background-color: transparent;
-	text-align: center;
-	position: relative;
-	width: 100%;
-	height: 100%;
+    overflow: hidden;
+    background-color: transparent;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
-
 #character-image img {
     width: 17%;
     height: auto;
-	margin-top: 65px;
-	margin-bottom: 65px;
-	margin-left: 0.5%;
-	margin-right: 0.5%;
+    margin: 65px 0.5%;
     border: 5px solid #FFFFFF;
-	border-radius: 25px;
-	transition: transform 0.5s ease;
+    border-radius: 25px;
+    transition: transform 0.5s ease;
 }
-
 #character-image img:hover {
-	transform: scale(1.2);
+    transform: scale(1.2);
 }
 
+/* ===== 頁尾 ===== */
 footer {
-	width: 100%;
+    width: 100%;
     background-color: #222222;
     color: #FFFFFF;
     text-align: center;
     padding: 10px 0;
-    bottom: 0;
 }
+
+/* ===== 響應式：手機或小螢幕 ===== */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    #main-title {
+        font-size: 1.5em;
+    }
+
+    /* 
+	#sub-title {
+        font-size: 0.9em;
+    } 
+	*/
+
+    h2 {
+        font-size: 2em;
+    }
+
+    p {
+        font-size: 0.7em;
+    }
+
+	nav ul li {
+		display: inline;
+		margin: 0 0px;
+	}
+
+    nav ul li a {
+        font-size: 0.5em;
+    }
+
+    #download-button {
+        font-size: 0.7em;
+        padding: 8px 14px;
+    }
+
+    .link-style a {
+        font-size: 0.9em;
+    }
+}
+
