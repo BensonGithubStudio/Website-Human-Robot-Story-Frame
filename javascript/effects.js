@@ -21,15 +21,24 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-	const btn = document.getElementById("expand-btn");
-	const hiddenParas = document.querySelectorAll(".extra");
+	const buttons = document.querySelectorAll(".expand-btn");
 
-	btn.addEventListener("click", function () {
-		hiddenParas.forEach(p => {
-			p.classList.remove("hidden");
-			p.style.display = "block"; // 確保解除 hidden 後有顯示
+	buttons.forEach(btn => {
+		btn.addEventListener("click", function (e) {
+			e.preventDefault();
+
+			// 找到這個按鈕所屬的 section
+			const section = btn.closest("section");
+			// 找該 section 中的 .extra
+			const hiddenParas = section.querySelectorAll(".extra");
+
+			hiddenParas.forEach(p => {
+				p.classList.remove("hidden");
+				p.style.display = "block";
+			});
+
+			btn.style.display = "none";
 		});
-		btn.style.display = "none";
 	});
 });
 
