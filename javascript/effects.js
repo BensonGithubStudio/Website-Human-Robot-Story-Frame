@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener("DOMContentLoaded", function () {
 	const btn = document.getElementById("expand-btn");
-	const hiddenParas = document.querySelectorAll("#introduce .extra");
+	const hiddenParas = document.querySelectorAll(".extra");
 
 	btn.addEventListener("click", function () {
 		hiddenParas.forEach(p => {

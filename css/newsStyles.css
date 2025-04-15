@@ -209,6 +209,27 @@ p.visible {
     transform: translateY(0);
 }
 
+.hidden {
+    display: none;
+}
+
+#scene-image {
+    padding: 20px;
+    text-align: center;
+}
+
+#scene-image img {
+    margin: 0 1%;
+    width: 31%;
+    height: auto;
+    border-radius: 25px;
+    transition: transform 0.5s ease;
+}
+
+#scene-image img:hover {
+    transform: scale(1.25);
+}
+
 .link-style {
 	right: 65px;
 	width: 150px;
