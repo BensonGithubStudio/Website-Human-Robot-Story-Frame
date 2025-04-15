@@ -263,11 +263,10 @@ h2.visible, p.visible {
     height: 100%;
 }
 #character-image img {
-    width: 17%;
+    width: 22%;
     height: auto;
-    margin: 65px 0.5%;
-	margin-right: 5%;
-	margin-left: 5%;
+	margin-right: 3%;
+	margin-left: 3%;
     border: 5px solid #FFFFFF;
     border-radius: 25px;
     transition: transform 0.5s ease;
@@ -326,16 +325,5 @@ footer {
     .link-style a {
         font-size: 0.9em;
     }
-
-	#character-image img {
-		width: 17%;
-		height: auto;
-		margin: 5px 0.5%;
-		margin-right: 5%;
-		margin-left: 5%;
-		border: 5px solid #FFFFFF;
-		border-radius: 25px;
-		transition: transform 0.5s ease;
-	}
 }
 
