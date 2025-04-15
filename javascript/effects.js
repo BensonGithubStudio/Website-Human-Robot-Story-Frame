@@ -20,6 +20,20 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+	const btn = document.getElementById("expand-btn");
+	const hiddenParas = document.querySelectorAll("#introduce .extra");
+
+	btn.addEventListener("click", function () {
+		hiddenParas.forEach(p => {
+			p.classList.remove("hidden");
+			p.style.display = "block"; // 確保解除 hidden 後有顯示
+		});
+		btn.style.display = "none";
+	});
+});
+
+
 //logo的淡出效果
 window.onload = function() {
 	setTimeout(function() {
@@ -37,10 +51,12 @@ function FadeOutBlock() {
 	const pTextElement = document.getElementsByTagName('p');
 	
 	document.getElementsByClassName('video-container')[0].style.display = 'block';
-	for (var i = 0; i < h2TextElement.length; i++) {
+	for (let i = 0; i < h2TextElement.length; i++) {
 		h2TextElement[i].style.display = 'block';
 	}
-	for (var i = 0; i < pTextElement.length; i++) {
-		pTextElement[i].style.display = 'block';
+	for (let i = 0; i < pTextElement.length; i++) {
+		if (!pTextElement[i].classList.contains('extra')) {
+			pTextElement[i].style.display = 'block';
+		}
 	}
 }

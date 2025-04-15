@@ -207,6 +207,10 @@ p.visible {
     transform: translateY(0);
 }
 
+.hidden {
+	display: none;
+}
+
 .link-style {
 	right: 65px;
 	width: 150px;
