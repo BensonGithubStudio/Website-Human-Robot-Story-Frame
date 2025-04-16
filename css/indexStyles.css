@@ -67,7 +67,7 @@ header {
     z-index: 4;
 }
 #title-image img {
-    width: 55px;
+    width: 5.5vw;
     height: auto;
 }
 
@@ -104,7 +104,7 @@ header {
     border: none;
     border-radius: 15px;
     cursor: pointer;
-    font-size: 0.8em;
+    font-size: 1vw;
     font-weight: 800;
     z-index: 4;
     transition: background-color 0.5s ease, color 0.5s ease;
@@ -296,6 +296,11 @@ footer {
         font-size: 6.5vw;
     }
 
+    #title-image img {
+        width: 13vw;
+        height: auto;
+    }
+
     /* 
 	#sub-title {
         font-size: 0.9em;
@@ -328,7 +333,7 @@ footer {
     }
 
     #download-button {
-        font-size: 0.7em;
+        font-size: 2.3vw;
         padding: 8px 14px;
     }
 
