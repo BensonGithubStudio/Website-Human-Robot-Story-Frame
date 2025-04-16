@@ -78,7 +78,7 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 3em;
+    font-size: 5vw;
     font-weight: 1000;
     z-index: 2;
 }
@@ -293,7 +293,7 @@ footer {
     }
 
     #main-title {
-        font-size: 1.5em;
+        font-size: 6.5vw;
     }
 
     /* 

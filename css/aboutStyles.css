@@ -102,7 +102,7 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 3em;
+    font-size: 5vw;
     font-weight: 1000;
     z-index: 2;
 }
@@ -224,7 +224,7 @@ p.visible {
 
 #picture img {
     margin: 0 1%;
-    width: 31%;
+    width: 75%;
     height: auto;
     border-radius: 25px;
     transition: transform 0.5s ease;
@@ -270,7 +270,7 @@ footer {
     }
 
     #main-title {
-        font-size: 1.5em;
+        font-size: 6.5vw;
     }
 
     /* 
