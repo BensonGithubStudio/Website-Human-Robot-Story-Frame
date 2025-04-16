@@ -102,7 +102,7 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 5vw;
+    font-size: 3em;
     font-weight: 1000;
     z-index: 2;
 }
@@ -163,7 +163,7 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.2vw;
+    font-size: 0.8em;
 	font-weight: 800;
     padding: 5px 10px;
     background-color: transparent; /* No background color */
@@ -184,7 +184,7 @@ section {
 h2 {
 	display: none;
     color: #FFFFFF;
-    font-size: 5vw;
+    font-size: 3.5em;
 	font-weight: 1000;
 	opacity: 0; /* 起始時文字不可見 */
     transform: translateY(80px);
@@ -199,7 +199,6 @@ h2.visible {
 p {
 	display: none;
 	color: #BFBFBF;
-    font-size: 1.5vw;
 	font-weight: 700;
 	opacity: 0;
     transform: translateY(80px);
@@ -270,6 +269,20 @@ footer {
     text-align: center;
 }
 
+#play-title {
+    color: #FFFFFF;
+    font-size: 3em;
+    font-weight: 1000;
+    margin-bottom: 10px;
+}
+
+#play-subtitle {
+    color: #BFBFBF;
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
 #platform-buttons {
     margin: 20px 0;
 }
@@ -297,7 +310,7 @@ footer {
     }
 
     #main-title {
-        font-size: 6.5vw;
+        font-size: 1.5em;
     }
 
     /* 
@@ -305,13 +318,13 @@ footer {
         font-size: 0.9em;
     } 
 	*/
-    
+
     h2 {
-        font-size: 6.5vw;
+        font-size: 2em;
     }
 
     p {
-        font-size: 2.5vw;
+        font-size: 0.7em;
     }
 
 	section {
@@ -329,7 +342,7 @@ footer {
 	}
 
     nav ul li a {
-        font-size: 1.7vw;
+        font-size: 0.5em;
     }
 
     #download-button {

@@ -78,7 +78,7 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 5vw;
+    font-size: 3em;
     font-weight: 1000;
     z-index: 2;
 }
@@ -152,7 +152,7 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.2vw;
+    font-size: 0.8em;
     font-weight: 800;
     padding: 5px 10px;
     border-radius: 5px;
@@ -174,12 +174,11 @@ h2, p {
 }
 h2 {
     color: #FFFFFF;
-    font-size: 5vw;
+    font-size: 3.5em;
     font-weight: 1000;
 }
 p {
     color: #BFBFBF;
-    font-size: 1.5vw;
     font-weight: 700;
 }
 h2.visible, p.visible {
@@ -293,7 +292,7 @@ footer {
     }
 
     #main-title {
-        font-size: 6.5vw;
+        font-size: 1.5em;
     }
 
     /* 
@@ -301,14 +300,6 @@ footer {
         font-size: 0.9em;
     } 
 	*/
-
-    h2 {
-        font-size: 6.5vw;
-    }
-
-    p {
-        font-size: 2.5vw;
-    }
 
 	section {
 		padding: 20px;
@@ -318,13 +309,21 @@ footer {
 		border-radius: 25px;
 	}
 
+    h2 {
+        font-size: 2em;
+    }
+
+    p {
+        font-size: 0.7em;
+    }
+
 	nav ul li {
 		display: inline;
 		margin: 0 0px;
 	}
 
     nav ul li a {
-        font-size: 1.7vw;
+        font-size: 0.5em;
     }
 
     #download-button {
@@ -339,5 +338,7 @@ footer {
     .link-style a {
         font-size: 0.9em;
     }
+
+    
 }
 
