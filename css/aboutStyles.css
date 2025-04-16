@@ -223,7 +223,7 @@ p.visible {
 
 #picture img {
     margin: 0 1%;
-    width: 31%;
+    width: 75%;
     height: auto;
     border-radius: 25px;
     transition: transform 0.5s ease;
