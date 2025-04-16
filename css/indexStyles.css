@@ -152,7 +152,7 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    font-size: 0.8em;
+    font-size: 1.2vw;
     font-weight: 800;
     padding: 5px 10px;
     border-radius: 5px;
@@ -174,11 +174,12 @@ h2, p {
 }
 h2 {
     color: #FFFFFF;
-    font-size: 3.5em;
+    font-size: 5vw;
     font-weight: 1000;
 }
 p {
     color: #BFBFBF;
+    font-size: 1.5vw;
     font-weight: 700;
 }
 h2.visible, p.visible {
@@ -309,22 +310,10 @@ footer {
 		border-radius: 25px;
 	}
 
-    h2 {
-        font-size: 2em;
-    }
-
-    p {
-        font-size: 0.7em;
-    }
-
 	nav ul li {
 		display: inline;
 		margin: 0 0px;
 	}
-
-    nav ul li a {
-        font-size: 0.5em;
-    }
 
     #download-button {
         font-size: 0.7em;
