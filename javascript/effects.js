@@ -42,6 +42,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 });
 
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    const scrollY = window.scrollY;
+    const maxScroll = 300; // 最多到多少 scroll 時完全變透明
+
+    // 比例轉換成 0（黑）~ 0.5（較透明）
+    const opacity = Math.max(1 - scrollY / maxScroll, 0.35); 
+
+    header.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+});
 
 //logo的淡出效果
 window.onload = function() {
