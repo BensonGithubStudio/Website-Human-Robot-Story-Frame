@@ -215,8 +215,8 @@ h2.visible, p.visible {
     text-align: center;
 }
 #scene-image img {
-    margin: 0 1%;
-    width: 31%;
+    margin: 15px 1%;
+    width: 45%;
     height: auto;
     border-radius: 25px;
     transition: transform 0.5s ease;
@@ -338,5 +338,7 @@ footer {
     .link-style a {
         font-size: 0.9em;
     }
+
+    
 }
 
