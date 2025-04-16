@@ -270,20 +270,6 @@ footer {
     text-align: center;
 }
 
-#play-title {
-    color: #FFFFFF;
-    font-size: 3em;
-    font-weight: 1000;
-    margin-bottom: 10px;
-}
-
-#play-subtitle {
-    color: #BFBFBF;
-    font-size: 1.1em;
-    font-weight: 700;
-    margin-bottom: 30px;
-}
-
 #platform-buttons {
     margin: 20px 0;
 }
