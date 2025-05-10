@@ -7,15 +7,13 @@ document.addEventListener("DOMContentLoaded", function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // 一旦顯示，停止觀察該元素
+            } else {
+                entry.target.classList.remove('visible'); // 滑出視窗時移除 class
             }
         });
     });
 
-    h2TextElements.forEach(element => {
-        observer.observe(element);
-    });
-	pTextElements.forEach(element => {
+    [...h2TextElements, ...pTextElements].forEach(element => {
         observer.observe(element);
     });
 });
