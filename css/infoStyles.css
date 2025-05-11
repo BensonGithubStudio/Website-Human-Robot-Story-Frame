@@ -199,6 +199,7 @@ h2.visible {
 p {
 	display: none;
 	color: #BFBFBF;
+    font-family: 'Tagesschrift', 'LXGW WenKai TC', sans-serif;
 	font-weight: 700;
 	opacity: 0;
     transform: translateY(80px);

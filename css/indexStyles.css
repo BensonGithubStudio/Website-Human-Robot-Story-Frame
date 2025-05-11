@@ -15,10 +15,10 @@
 /* ===== 基本設定 ===== */
 body {
     position: fixed;
+    font-family: Arial, sans-serif;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
     background-color: #000000;
     color: #333;
 }
@@ -180,6 +180,7 @@ h2 {
 p {
     color: #BFBFBF;
     font-weight: 700;
+    font-family: 'Tagesschrift', 'LXGW WenKai TC', sans-serif;
 }
 h2.visible, p.visible {
     opacity: 1;
