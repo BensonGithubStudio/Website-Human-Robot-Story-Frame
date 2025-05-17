@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'ChiayiFont';
+  src: url('../fonts/ChiayiCity.woff2') format('woff2'),
+       url('../fonts/ChiayiCity.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* 選取整個滾動條 */
 ::-webkit-scrollbar {
     width: 5px;
@@ -20,7 +28,7 @@
 
 body {
 	position: fixed;
-    font-family: Arial, sans-serif;
+    font-family: 'ChiayiFont', sans-serif;
 	overflow-x: hidden;
     margin: 0;
     padding: 0;
@@ -186,6 +194,7 @@ h2 {
 	display: none;
     color: #FFFFFF;
     font-size: 3.5em;
+    letter-spacing: 9px;
 	font-weight: 1000;
 	opacity: 0; /* 起始時文字不可見 */
     transform: translateY(80px);
@@ -204,6 +213,7 @@ p {
 	color: #BFBFBF;
     font-family: 'Tagesschrift', 'LXGW WenKai TC', sans-serif;
 	font-weight: 700;
+    letter-spacing: 7px;
 	opacity: 0;
     transform: translateY(80px);
     transition: opacity 1.5s ease, transform 1.5s ease;
@@ -286,6 +296,7 @@ footer {
 
     p {
         font-size: 0.7em;
+        letter-spacing: 4.5px;
     }
 
 	section {
