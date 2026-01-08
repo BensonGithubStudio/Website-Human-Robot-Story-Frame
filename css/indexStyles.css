@@ -86,7 +86,8 @@ header {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 3em;
+    font-size: 5em;
+    letter-spacing: 25px;
     font-weight: 1000;
     z-index: 2;
 }
@@ -234,7 +235,7 @@ h2.visible, p.visible {
     transition: transform 0.5s ease;
 }
 #scene-image img:hover {
-    transform: scale(1.25);
+    transform: scale(1.1);
 }
 
 /* 人類與機器人圖片區 */
@@ -285,7 +286,7 @@ h2.visible, p.visible {
     transition: transform 0.5s ease;
 }
 #character-image img:hover {
-    transform: scale(1.2);
+    transform: scale(1.05);
 }
 
 /* ===== 頁尾 ===== */
@@ -305,6 +306,7 @@ footer {
 
     #main-title {
         font-size: 1.5em;
+        letter-spacing: 10px;
     }
 
     /* 
