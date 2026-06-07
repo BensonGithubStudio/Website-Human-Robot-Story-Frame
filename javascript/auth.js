@@ -1,18 +1,26 @@
-const user = JSON.parse(localStorage.getItem("user"));
+const userData = localStorage.getItem("user");
 
-const userActions = document.getElementById("user-actions");
+if (userData) {
+    try {
+        const user = JSON.parse(userData);
+        
+        const userActions = document.getElementById("user-actions") || document.querySelector(".user-actions");
+        
+        if (userActions) {
+            const displayName = user.name || user.account || "會員";
 
-if(user){
-    userActions.innerHTML = `
-        <span> ${user.account} </span>
-
-        <a href="#" id="logout-btn" class="member-btn"> 登出 </a>
-    `;
-
-    document.getElementById("logout-btn").addEventListener("click",(e)=>{
-
-        e.preventDefault();
-        localStorage.removeItem("user");
-        location.reload();
-    });
+            userActions.innerHTML = `
+                <span class="welcome-text">哈囉，${displayName}</span>
+                <a href="#" id="logout-btn" class="logout-btn">登出</a>
+            `;
+            
+            document.getElementById("logout-btn").addEventListener("click", (e) => {
+                e.preventDefault();
+                localStorage.removeItem("user"); 
+                location.reload();  
+            });
+        }
+    } catch (error) {
+        console.error("【驗證系統】解析 localStorage 失敗:", error);
+    }
 }
