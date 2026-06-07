@@ -5,6 +5,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbywlPCxT1cqr5uDpoy-t6Oj
 ====================================================== */
 
 const form = document.getElementById("login-form");
+const submitBtn = form.querySelector(".login-submit");
 
 form.addEventListener("submit", async (e)=>{
 
@@ -17,6 +18,11 @@ form.addEventListener("submit", async (e)=>{
         alert("請輸入帳號密碼");
         return;
     }
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = "CONNECTING..."; 
+    submitBtn.style.opacity = "0.6";
+    submitBtn.style.cursor = "not-allowed";
 
     try{
         const response =
@@ -34,26 +40,31 @@ form.addEventListener("submit", async (e)=>{
         console.log(result);
 
         if(result.success){
-
-            /* 儲存登入資訊 */
-
             localStorage.setItem(
                 "user",
                 JSON.stringify(result.user)
             );
 
-            alert("登入成功");
-
             window.location.href = "index.html";
         }
         else{
             alert(result.message);
+            
+            resetSubmitButton();
         }
 
     }
     catch(error){
         console.error(error);
-
         alert("伺服器錯誤");
+        
+        resetSubmitButton();
     }
 });
+
+function resetSubmitButton() {
+    submitBtn.disabled = false;
+    submitBtn.innerText = "CONNECT";
+    submitBtn.style.opacity = "1";
+    submitBtn.style.cursor = "pointer";
+}
