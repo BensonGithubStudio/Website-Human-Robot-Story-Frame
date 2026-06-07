@@ -1,0 +1,409 @@
+/* ===== 商城佈局 ===== */
+.shop-container {
+    padding: 120px 10% 60px;
+    min-height: 100vh;
+    background: #050505;
+}
+
+.shop-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.shop-header h1 {
+    font-size: 3rem;
+    margin: 15px 0;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.shop-desc {
+    color: #888;
+    font-size: 1rem;
+}
+
+/* ===== 商品網格 ===== */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.product-card {
+    background: rgba(15, 15, 22, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 懸停時的科幻藍色霓虹發光效果 */
+.product-card:hover {
+    transform: translateY(-8px);
+    border-color: #00A3FF;
+    box-shadow: 0 10px 30px rgba(0, 163, 255, 0.15);
+}
+
+.product-img {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #0b0b10;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.prod-tag {
+    font-size: 0.75rem;
+    color: #00A3FF;
+    border: 1px solid rgba(0, 163, 255, 0.3);
+    padding: 3px 10px;
+    border-radius: 999px;
+    align-self: flex-start;
+    margin-bottom: 15px;
+}
+
+.product-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.prod-desc {
+    color: #aaaaaa;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.prod-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 15px;
+}
+
+.price {
+    font-size: 1.4rem;
+    color: #fff;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+/* 購買按鈕 */
+.buy-btn {
+    background: transparent;
+    color: #00A3FF;
+    border: 1px solid #00A3FF;
+    padding: 10px 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+.buy-btn:hover {
+    background: #00A3FF;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 163, 255, 0.5);
+}
+
+/* ===== 購買彈窗樣式 ===== */
+.purchase-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.purchase-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: #0d0d14;
+    border: 1px solid #FF4646; /* 使用警告紅色增強恐怖感 */
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 70, 70, 0.2);
+}
+
+.modal-content h2 {
+    color: #FF4646;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: 12px 30px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.modal-btn.confirm {
+    background: #FF4646;
+    color: white;
+}
+.modal-btn.confirm:hover {
+    box-shadow: 0 0 15px rgba(255, 70, 70, 0.5);
+}
+
+.modal-btn.cancel {
+    background: transparent;
+    color: #888;
+    border: 1px solid #444;
+}
+.modal-btn.cancel:hover {
+    color: white;
+    border-color: #888;
+}
+
+/* ===== 右上角購物車圖示按鈕 ===== */
+.cart-floating-btn {
+    position: fixed;
+    bottom: 30px;              /* 距離底部 30 像素 */
+    right: 30px;               /* 距離右側 30 像素 */
+    width: 60px;
+    height: 60px;
+    background: #0f0f15;       /* 暗色背景 */
+    border: 1px solid #00A3FF; /* 訊誆經典藍色邊框 */
+    border-radius: 50%;        /* 完美的圓形 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;             /* 確保按鈕永遠漂浮在商品卡片上方 */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(0, 163, 255, 0.2);
+}
+
+.cart-floating-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: #00A3FF;
+    border-color: #00A3FF;
+    box-shadow: 0 0 25px rgba(0, 163, 255, 0.6);
+}
+
+.cart-floating-btn:hover .cart-icon {
+    filter: brightness(0); /* 當按鈕變藍底時，圖示自動變成純黑色 */
+}
+
+.cart-icon {
+    font-size: 1.5rem;
+    transition: filter 0.3s;
+}
+
+.cart-count {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #FF4646;       /* 驚悚警戒紅 */
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+    box-shadow: 0 0 10px rgba(255, 70, 70, 0.8);
+    border: 1px solid #050505; /* 用黑邊稍微與主體做區隔 */
+}
+
+/* ===== 購物車側邊欄主體 ===== */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 380px;
+    max-width: 100%;
+    height: 100vh;
+    background: #09090e;
+    border-left: 1px solid rgba(0, 163, 255, 0.15);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    transform: translateX(100%); /* 預設藏在螢幕右側外面 */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+}
+
+/* 當啟用時滑入網頁 */
+.cart-sidebar.active {
+    transform: translateX(0);
+    border-left-color: #00A3FF;
+    box-shadow: -10px 0 40px rgba(0, 163, 255, 0.05);
+}
+
+.cart-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 20px;
+}
+.cart-sidebar-header h2 {
+    font-size: 1.2rem;
+    color: #00A3FF;
+    letter-spacing: 1px;
+}
+.close-cart {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: 0.2s;
+}
+.close-cart:hover {
+    color: #FF4646;
+}
+
+/* 購物車品項列表區 */
+.cart-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px 0;
+}
+.empty-msg {
+    color: #555;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
+/* 單個購物車商品卡片卡 */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+.cart-item-details h4 {
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 5px;
+}
+.cart-item-details .item-price {
+    color: #00A3FF;
+    font-size: 0.85rem;
+    font-family: monospace;
+}
+
+/* 數量調整器 */
+.cart-item-amt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.amt-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.amt-btn:hover {
+    border-color: #00A3FF;
+    color: #00A3FF;
+}
+.item-count {
+    font-family: monospace;
+    font-size: 0.95rem;
+    min-width: 15px;
+    text-align: center;
+}
+
+/* 購物車底部結帳區 */
+.cart-sidebar-footer {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 20px;
+}
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+.total-price {
+    color: #fff;
+    font-weight: bold;
+    font-family: monospace;
+}
+.checkout-btn {
+    width: 100%;
+    background: #00A3FF;
+    color: black;
+    border: none;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.checkout-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 163, 255, 0.4);
+    background: #00b0ff;
+}

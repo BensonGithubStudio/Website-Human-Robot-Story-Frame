@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訊誆商城｜黑市終端系統</title>
+    
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/shopStyles.css">
+    <link rel="icon" href="images/logo.png">
+
+    <script src="javascript/auth.js" defer></script>
+    <script src="javascript/shop.js" defer></script>
+</head>
+
+<body>
+    <div class="scanline"></div>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="訊誆 Logo">
+        </a>
+        <nav>
+            <a href="index.html#story">世界觀</a>
+            <a href="index.html#gallery">場景展示</a>
+            <a href="index.html#features">遊戲特色</a>
+            <a href="shop.html" class="active">訊誆商城</a>    
+            <a href="download.html">免費遊玩</a>
+        </nav>
+        
+        <div class="user-actions" id="user-actions">
+            <a href="login.html" class="login-btn">登入</a>
+            <a href="register.html" class="member-btn">註冊</a>
+        </div>
+    </header>
+
+    <main class="shop-container">
+        <div class="shop-header">
+            <span class="section-tag">FRAUD FRAME MARKET</span>
+            <h1>訊誆商城</h1>
+            <p class="shop-desc">精心設計的遊戲周邊，包含貼紙、吊飾、明信片</p>
+        </div>
+
+        <section class="products-grid">
+            
+            <div class="product-card" data-id="p1" data-name="3種質感貼紙合集" data-price="100">
+                <div class="product-img">
+                    <img src="images/shop/Shop-1.webp" alt="貼紙包" onerror="this.src='https://placehold.co/400x400/0f0f15/00A3FF?text=ARTBOOK'">
+                </div>
+                <div class="product-info">
+                    <span class="prod-tag">貼紙包</span>
+                    <h3>3種質感貼紙合集</h3>
+                    <p class="prod-desc">收錄未公開的 AI 怪物設定稿、場景美術精選及開發團隊核心機密。</p>
+                    <div class="prod-footer">
+                        <span class="price">NT$ 100</span>
+                        <button class="buy-btn">加入購物車</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="p2" data-name="精美吊飾" data-price="65">
+                <div class="product-img">
+                    <img src="images/shop/Shop-2.webp" alt="吊飾" onerror="this.src='https://placehold.co/400x400/0f0f15/00A3FF?text=DIGITAL+OST'">
+                </div>
+                <div class="product-info">
+                    <span class="prod-tag">吊飾</span>
+                    <h3>精美吊飾</h3>
+                    <p class="prod-desc">內含 12 首由知名樂師打造的心理壓迫式科幻電子音樂，感受深層恐懼。</p>
+                    <div class="prod-footer">
+                        <span class="price">NT$ 65</span>
+                        <button class="buy-btn">加入購物車</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="p3" data-name="明信片" data-price="35">
+                <div class="product-img">
+                    <img src="images/shop/Shop-3.webp" alt="明信片" onerror="this.src='https://placehold.co/400x400/0f0f15/00A3FF?text=MOUSEPAD'">
+                </div>
+                <div class="product-info">
+                    <span class="prod-tag">明信片</span>
+                    <h3>明信片</h3>
+                    <p class="prod-desc">獨家《訊誆》終端機發光條紋設計，低阻力表面，精密追蹤 AI 的動向。</p>
+                    <div class="prod-footer">
+                        <span class="price">NT$ 35</span>
+                        <button class="buy-btn">加入購物車</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-sidebar-header">
+            <h2>已鎖定清單 (CART)</h2>
+            <button class="close-cart" id="cart-close">×</button>
+        </div>
+        
+        <div class="cart-items" id="cart-items">
+            <p class="empty-msg">儲存晶片中尚無物資資料...</p>
+        </div>
+
+        <div class="cart-sidebar-footer">
+            <div class="total-row">
+                <span>總計金額</span>
+                <span class="total-price" id="cart-total">NT$ 0</span>
+            </div>
+            <button class="checkout-btn" id="checkout-btn">送出終端結帳</button>
+        </div>
+    </div>
+
+    <div class="purchase-modal" id="purchase-modal">
+        <div class="modal-content">
+            <h2 id="modal-title">系統確認中...</h2>
+            <p id="modal-msg">正在為您的帳號要求此物資的購買權限。</p>
+            <div class="modal-actions">
+                <button class="modal-btn confirm" id="modal-confirm">建立連線</button>
+                <button class="modal-btn cancel" id="modal-cancel">切斷終端</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-floating-btn" id="cart-toggle">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-count" id="cart-count">0</span>
+    </div>
+
+    <footer>
+        <p>© 2026 訊誆 | 4人團隊獨立開發</p>
+    </footer>
+</body>
+</html>
