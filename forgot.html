@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>會員登入｜訊誆</title>
+    <title>忘記密碼｜訊誆</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/user.css">
     <link rel="icon" href="images/logo.webp">
 
-    <script src="javascript/login.js" defer></script>
-
+    <script src="javascript/forgot.js" defer></script>
     <script src="javascript/auth.js" defer></script>
 </head>
 
@@ -36,37 +35,33 @@
 
     <main class="login-page">
         <div class="login-panel">
-            <span class="section-tag"> MEMBER LOGIN </span>
+            <span class="section-tag"> PASSWORD RECOVERY </span>
 
-            <h1> 登入 </h1>
+            <h1> 重設密碼 </h1>
 
-            <p class="login-description"> 請登入你的《訊誆》帳號，享有更多功能。 </p>
+            <p class="login-description"> 請輸入您的帳號與註冊暱稱以驗證身分並重設密碼。 </p>
 
-            <form class="login-form" id="login-form">
+            <form class="login-form" id="forgot-form">
                 <div class="input-group">
-                    <label> 帳號 </label>
-
-                    <input
-                        type="text"
-                        id="account"
-                        placeholder="輸入帳號">
+                    <label> ACCOUNT </label>
+                    <input type="text" id="forgot-account" placeholder="輸入您的帳號" required>
                 </div>
 
                 <div class="input-group">
-                    <label> 密碼 </label>
-
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="輸入密碼">
+                    <label> PLAYER NAME </label>
+                    <input type="text" id="forgot-name" placeholder="輸入註冊時填寫的暱稱" required>
                 </div>
 
-                <button type="submit" class="primary-btn login-submit"> 登入 </button>
+                <div class="input-group">
+                    <label> NEW PASSWORD </label>
+                    <input type="password" id="forgot-new-password" placeholder="設定您的全新密碼" required>
+                </div>
+
+                <button type="submit" class="primary-btn login-submit" id="forgot-submit"> 重設密碼 </button>
             </form>
 
             <div class="login-extra">
-                <a href="register.html"> 建立帳號 </a>
-                <a href="forgot.html"> 忘記密碼 </a>
+                <a href="login.html"> 返回登入頁面 </a>
             </div>
         </div>
     </main>

@@ -1,26 +1,26 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbzdhuI67X9DG1dzij262UHzo6RH5x3D31PHYDrladOI8yfknGpDLy-fXRvN2dg4AsHwNA/exec";
 
 /* ======================================================
-   REGISTER SYSTEM
+   FORGOT / RESET PASSWORD SYSTEM
 ====================================================== */
 
-const form = document.getElementById("register-form");
-const submitBtn = document.getElementById("reg-submit");
+const form = document.getElementById("forgot-form");
+const submitBtn = document.getElementById("forgot-submit");
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById("reg-name").value.trim();
-    const account = document.getElementById("reg-account").value.trim();
-    const password = document.getElementById("reg-password").value.trim();
+    const account = document.getElementById("forgot-account").value.trim();
+    const name = document.getElementById("forgot-name").value.trim();
+    const newPassword = document.getElementById("forgot-new-password").value.trim();
 
-    if (!account || !password) {
-        alert("請輸入欲註冊的帳號與密碼");
+    if (!account || !name || !newPassword) {
+        alert("請完整填寫所有欄位");
         return;
     }
 
     submitBtn.disabled = true;
-    submitBtn.innerText = "註冊中...";
+    submitBtn.innerText = "OVERWRITING...";
     submitBtn.style.opacity = "0.6";
     submitBtn.style.cursor = "not-allowed";
 
@@ -28,11 +28,10 @@ form.addEventListener("submit", async (e) => {
         const response = await fetch(API_URL, {
             method: "POST",
             body: JSON.stringify({
-                action: "register",
+                action: "resetPassword",
                 account: account,
-                password: password,
                 name: name,
-                email: ""
+                newPassword: newPassword
             })
         });
 
@@ -41,22 +40,24 @@ form.addEventListener("submit", async (e) => {
         console.log(result);
 
         if (result.success) {
+            alert("密碼重設成功！請使用新密碼重新連接系統。");
             window.location.href = "login.html";
         } else {
+
             alert(result.message);
             resetSubmitButton();
         }
 
     } catch (error) {
         console.error(error);
-        alert("伺服器錯誤，請稍後再試");
+        alert("安全連線失敗，請稍後再試");
         resetSubmitButton();
     }
 });
 
 function resetSubmitButton() {
     submitBtn.disabled = false;
-    submitBtn.innerText = "註冊帳號";
+    submitBtn.innerText = "RESET PASSWORD";
     submitBtn.style.opacity = "1";
     submitBtn.style.cursor = "pointer";
 }
