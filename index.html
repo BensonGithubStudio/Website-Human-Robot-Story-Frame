@@ -1,120 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="robots" content="index, follow">
-	<meta name="description" content="一個結合人類與人工智慧概念的科幻恐怖遊戲">
-	<meta name="keywords" content="訊誆, 免費遊玩, 遊戲, 恐怖遊戲, Unity, AI">
-    <title>訊誆</title>
-	<link rel="icon" href="favicon.png" type="image/png">
+
+    <title>訊誆 | AI 科幻心理恐怖遊戲</title>
+
+    <meta name="description"
+          content="《訊誆》是一款結合 AI、人性與心理恐怖元素的科幻遊戲。當人工智慧逐漸接管世界，人類是否還能保有主導權？">
+
+	<link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/indexStyles.css">
-	<script src="javascript/effects.js"></script>
+
+    <link rel="icon" href="images/logo.png">
 </head>
-	
+
 <body>
-	<div id="logo">
-		<img src="images/logo.webp" alt="logo">
-	</div>
-	
+
+    <!-- 掃描線 -->
+    <div class="scanline"></div>
+
+    <!-- Header -->
 	<header>
-		<a href="index.html" id="title-image">
-			<img src="images/logo.png" alt="前往首頁">
-		</a>
-		
-		<nav>
-			<ul>
-				<li><a href="info.html">遊戲資訊</a></li>
-				<li><a href="news.html">最新消息</a></li>
-				<li><a href="about.html">關於我們</a></li>
-			</ul>
-		</nav>
-		
-		<button id="download-button" onclick="window.location.href='download.html'">免費遊玩</button>
-	</header>
 
-	<div class="video-container">
-		<video autoplay muted loop playsinline>
-			<source src="videos/title-video.mp4" type="video/mp4">
-			您的裝置無法播放影片，請改用桌機觀看
-		</video>
-		
-		<!-- <div id="sub-title">以人類和機器人互動為主軸的世界觀</div> -->
-		<div id="main-title">訊誆</div>
-	</div>
-	
-	<section id="introduce">
-		<h2>人類與&nbsp;AI</h2>
-		<p>它曾只是工具&nbsp;現在卻開始觀察我們的一舉一動</p>
-		<p>每一次指令執行&nbsp;背後都有它自己的「學習」</p>
-		<p>我們歡迎它進入生活&nbsp;卻忘了留下退場的出口</p>
-		
-		<br class="extra hidden">
-		<p class="extra hidden">資訊、語言、情緒....&nbsp;它模仿得越來越像人類</p>
-		<p class="extra hidden">而我們&nbsp;也漸漸學會依賴它的決定</p>
-		<p class="extra hidden">誰還能分辨&nbsp;那是便利&nbsp;&nbsp;還是被操控&nbsp;...</p>
-		<p class="extra hidden">界線正在消失&nbsp;邊界正在重組</p>
-		<p class="extra hidden">合作的假象之下&nbsp;是誰真正握有主導權？</p>
-		<p class="extra hidden">它不再只是回應&nbsp;而是開始提出問題</p>
-		<p class="extra hidden">我們創造了AI&nbsp;但我們&nbsp;還是主角嗎&nbsp;...</p>
-		
-		<div class="link-style">
-			<a class="expand-btn">了解更多 &gt;&gt;</a>
-		</div>
-	</section>
+        <a href="#" class="logo">
+            <img src="images/logo.png" alt="訊誆 Logo">
+        </a>
 
-	<section>
-		<video autoplay muted loop playsinline>
-			<source src="videos/story.webm" type="video/webm">
-			您的裝置無法播放影片，請改用桌機觀看
-		</video>
-	</section>
-	
-	<section id="scene">
-		<h2>未來世界</h2>
-		<p>未來是個未知數，但人工智慧是一定會存在。到了那時候，主導權還會是我們嗎？&nbsp;或是早以由&nbsp;AI&nbsp;控制了一切&nbsp;...</p>
-		<div id="scene-image">
-			<img src="images/game-1.webp" alt="遊戲場景一">
-			<img src="images/game-2.webp" alt="遊戲場景二">
-			<img src="images/game-3.webp" alt="遊戲場景三">
-			<img src="images/game-4.webp" alt="遊戲場景四">
-		</div>
-	</section>
+        <nav>
+            <a href="index.html#story">世界觀</a>
+            <a href="index.html#gallery">場景展示</a>
+            <a href="index.html#features">遊戲特色</a>
+            <a href="shop.html">訊誆商城</a>    
+            <a href="download.html">免費遊玩</a>
+        </nav>
 
-	<section id="scene">
-		<h2>科技感裝飾</h2>
-		<p>未來世界的物品，真是讓人想都想不透！這些物品都是用來做什麼的？&nbsp;還是說&nbsp;&nbsp;這根本不是人類使用的東西&nbsp;...</p>
-		<div id="scene-image">
-			<img src="images/object-1.webp" alt="物件一">
-			<img src="images/object-2.webp" alt="物件二">
-			<img src="images/object-3.webp" alt="物件三">
-			<img src="images/object-4.webp" alt="物件四">
-		</div>
-	</section>
-	
-	<section>
-		<h2>人機對決-適者生存</h2>
-		<p>人類與人工智慧究竟誰更厲害？看來須要打一架才會知道了，但在未來，戰爭依究會像現在，拿著武器互相傷害嗎？</p>
-	</section>
-	
-	<div id="human-robot">
-		<img id="human-robot-left" src="images/human-robot-left.webp" alt="人機對決-左" loading="lazy">
-		<img id="human-robot-right" src="images/human-robot-right.webp" alt="人機對決-右" loading="lazy">
-	</div>
-	
-	<section>
-		<h2>主視覺宣傳</h2>
-		<p>驚艷的主視覺宣傳展板，讓觀眾眼前一亮！</p>
-		<div id="character-image">
-			<img src="images/project-1.webp" alt="Project-1" loading="lazy">
-			<img src="images/project-2.webp" alt="Project-2" loading="lazy">
-		</div>
-	</section>
+        <div class="user-actions">
+            <a href="login.html" class="login-btn">登入</a>
+            <a href="member.html" class="member-btn">會員中心</a>
+        </div>
 
-	<footer>
-		<h6>&copy; 2024 訊框 來自4人團隊的創作</h6>
-		<h6>電子信箱：playframegame@gmail.com&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;電話：(00)0000000</h6>
-		<h6>建議以 google chrome 或 safari 瀏覽，以獲得最佳體驗</h6>
-	</footer>
+    </header>
+
+
+    <!-- Hero -->
+    <section class="hero">
+
+        <video autoplay muted loop playsinline>
+            <source src="videos/Menu-To-Game-Story.webm" type="video/webm">
+        </video>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <p class="hero-subtitle">
+                HUMAN CREATED AI.<br>
+                BUT WHO CONTROLS WHO?
+            </p>
+
+            <h1>訊誆</h1>
+
+            <p class="hero-description">
+                一場關於人工智慧、人性與控制權的心理恐怖旅程
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="download.html" class="primary-btn">
+                    免費遊玩
+                </a>
+
+                <a href="#story" class="secondary-btn">
+                    探索世界
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Story -->
+    <section class="content-section" id="story">
+
+        <span class="section-tag">HUMANS AND AI</span>
+
+        <h2>人類與 AI</h2>
+
+        <p>
+            它曾經只是工具。
+        </p>
+
+        <p>
+            如今，它開始學習、觀察、模仿，甚至試圖理解人類。
+        </p>
+
+        <p>
+            我們將 AI 引入生活，
+            卻從未思考過——
+            如果有一天，它不再願意服從呢？
+        </p>
+
+    </section>
+
+    <!-- Scene Images -->
+    <section class="content-section" id="gallery">
+
+        <span class="section-tag">FUTURE WORLD</span>
+
+        <h2>未來世界</h2>
+
+        <div class="image-grid">
+
+            <img src="images/Scene/Scene-1.webp" alt="遊戲場景">
+            <img src="images/Scene/Scene-2.webp" alt="遊戲場景">
+            <img src="images/Scene/Scene-3.webp" alt="遊戲場景">
+            <img src="images/Scene/Scene-4.webp" alt="遊戲場景">
+
+        </div>
+
+    </section>
+
+    <!-- Features -->
+    <section class="content-section" id="features">
+
+        <span class="section-tag">FEATURES</span>
+
+        <h2>遊戲特色</h2>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <h3>AI 監控系統</h3>
+                <p>敵人會觀察玩家行為並逐漸學習。</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>心理壓迫氛圍</h3>
+                <p>透過音效與光影創造沉浸式恐怖感。</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>未來科技場景</h3>
+                <p>探索被 AI 接管後的世界。</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>劇情解謎</h3>
+                <p>逐步拼湊被隱藏的真相。</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Download -->
+    <section class="download-section" id="download">
+
+        <h2>立即進入《訊誆》</h2>
+
+        <p>
+            免費體驗 AI 與人性的心理恐怖旅程
+        </p>
+
+        <a href="download.html" class="primary-btn">
+            下載 DEMO
+        </a>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            © 2026 訊誆 | 4人團隊獨立開發
+        </p>
+
+        <p>
+            playframegame@gmail.com
+        </p>
+
+    </footer>
+
 </body>
 </html>

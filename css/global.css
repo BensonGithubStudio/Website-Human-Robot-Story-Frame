@@ -1,0 +1,199 @@
+@font-face {
+    font-family: 'ChiayiFont';
+    src: url('../fonts/ChiayiCity.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'ChiayiFont', sans-serif;
+    background: #050505;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #666;
+}
+
+/* ===== Scanline ===== */
+.scanline {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.03),
+        rgba(255,255,255,.03) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+    opacity: .08;
+    z-index: 999;
+}
+
+/* ===== Header ===== */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 60px;
+    z-index: 100;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.logo img {
+    width: 58px;
+}
+
+nav {
+    display: flex;
+    gap: 40px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: .9rem;
+    letter-spacing: 2px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #00A3FF;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* ===== Button ===== */
+
+.login-btn,
+.member-btn {
+    border-radius: 999px;
+    text-decoration: none;
+    transition: .3s;
+    padding: 10px 20px;
+    font-size: .8rem;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 14px 32px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.secondary-btn:hover,
+.login-btn:hover {
+    background: white;
+    color: black;
+}
+
+/* 藍色主按鈕群 */
+.primary-btn,
+.member-btn {
+    background: #0084FF;
+    color: white;
+}
+
+.primary-btn:hover,
+.member-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0,132,255,.5);
+}
+
+/* 白框次按鈕群 */
+.secondary-btn,
+.login-btn {
+    border: 1px solid rgba(255,255,255,.3);
+    color: white;
+}
+
+/* ===== Hero 共用結構 ===== */
+.hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    z-index: 2;
+}
+
+/* ===== Section 共用標籤 ===== */
+.section-tag {
+    color: #00A3FF;
+    letter-spacing: 4px;
+    font-size: .8rem;
+}
+
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: #0A0A0A;
+    border-top: 1px solid rgba(255,255,255,.05);
+}
+
+footer p {
+    color: #777;
+    margin: 10px 0;
+}
+
+/* ===== Global RWD ===== */
+@media(max-width: 768px) {
+    header {
+        padding: 0 20px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    nav a {
+        font-size: .7rem;
+    }
+}

@@ -1,60 +1,188 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>免費遊玩｜訊誆</title>
-	<link rel="icon" href="favicon.png" type="image/png">
+
+    <meta name="description"
+          content="立即免費體驗《訊誆》—— 一場 AI 與人性的科幻心理恐怖旅程。">
+
+	<link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/downloadStyles.css">
-    <script src="javascript/effects.js"></script>
+
+    <link rel="icon" href="images/favicon.png">
 </head>
 
 <body>
-    <div id="logo">
-		<img src="images/logo.png" alt="logo">
-	</div>
-	
-	<header>
-		<a href="index.html" id="title-image">
-			<img src="images/logo.png" alt="前往首頁">
-		</a>
-		
-		<nav>
-			<ul>
-				<li><a href="info.html">遊戲資訊</a></li>
-				<li><a href="news.html">最新消息</a></li>
-				<li><a href="about.html">關於我們</a></li>
-			</ul>
-		</nav>
-		
-		<button id="download-button" onclick="window.location.href='download.html'">免費遊玩</button>
-	</header>
 
-    <div class="video-container">
-		<video autoplay muted loop playsinline>
-			<source src="videos/title-video.mp4" type="video/mp4">
-			您的裝置無法播放影片，請改用桌機觀看
-		</video>
-		
-		<!-- <div id="sub-title">什麼？？潘朵拉的世界正逐一被建造？？</div> -->
-		<div id="main-title">免費遊玩</div>
-	</div>
+    <!-- 掃描線 -->
+    <div class="scanline"></div>
 
-    <section id="game-download-section">
-        <h2 id="play-title">立即體驗<br>《訊誆》</h2>
-        <p id="play-subtitle">選擇你的平台，即刻展開對抗 AI 的生存之旅。</p>
+    <!-- Header -->
+    <header>
 
-        <div id="platform-buttons">
-            <a class="platform-btn">Windows 下載</a>
-            <a class="platform-btn">Mac 下載</a>
-            <a class="platform-btn">線上遊玩</a>
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="訊誆 Logo">
+        </a>
+
+        <nav>
+            <a href="index.html#story">世界觀</a>
+            <a href="index.html#gallery">場景展示</a>
+            <a href="index.html#features">遊戲特色</a>
+            <a href="shop.html">訊誆商城</a>    
+            <a href="download.html">免費遊玩</a>
+        </nav>
+
+        <div class="user-actions">
+            <a href="login.html" class="login-btn">登入</a>
+            <a href="member.html" class="member-btn">會員中心</a>
         </div>
+
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+
+        <video autoplay muted loop playsinline>
+            <source src="videos/Menu-To-Game-Story.webm" type="video/mp4">
+        </video>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <h1>免費遊玩</h1>
+
+            <p>
+                現在開始，進入 AI 接管後的世界。
+            </p>
+
+        </div>
+
     </section>
 
+    <!-- Download -->
+    <section class="download-section">
+
+        <span class="section-tag">
+            DOWNLOAD NOW
+        </span>
+
+        <h2>
+            立即體驗《訊誆》
+        </h2>
+
+        <p class="download-description">
+            選擇你的平台，踏入這場關於人工智慧與人性的心理恐怖旅程。
+        </p>
+
+        <div class="platform-grid">
+
+            <div class="platform-card">
+
+                <h3>Windows</h3>
+
+                <p>
+                    支援 Windows 10 / 11
+                </p>
+
+                <a href="#" class="download-btn">
+                    下載 Windows 版
+                </a>
+
+            </div>
+
+            <div class="platform-card">
+
+                <h3>macOS</h3>
+
+                <p>
+                    支援 Apple Silicon
+                </p>
+
+                <a href="#" class="download-btn">
+                    下載 Mac 版
+                </a>
+
+            </div>
+
+            <div class="platform-card">
+
+                <h3>Web Demo</h3>
+
+                <p>
+                    直接於瀏覽器體驗
+                </p>
+
+                <a href="#" class="download-btn">
+                    線上遊玩
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Requirements -->
+    <section class="spec-section">
+
+        <span class="section-tag">
+            SYSTEM
+        </span>
+
+        <h2>系統需求</h2>
+
+        <div class="spec-grid">
+
+            <div class="spec-card">
+
+                <h3>最低配備</h3>
+
+                <ul>
+                    <li>Windows 10</li>
+                    <li>Intel i5</li>
+                    <li>8GB RAM</li>
+                    <li>GTX 1060</li>
+                    <li>1GB 可用空間</li>
+                </ul>
+
+            </div>
+
+            <div class="spec-card">
+
+                <h3>建議配備</h3>
+
+                <ul>
+                    <li>Windows 11</li>
+                    <li>Intel i7</li>
+                    <li>16GB RAM</li>
+                    <li>RTX 3060</li>
+                    <li>3GB 可用空間</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <h6>&copy; 2024 訊框 來自4人團隊的創作</h6>
-        <h6>電子信箱：playframegame@gmail.com　電話：(00)0000000</h6>
-        <h6>建議以 Chrome 或 Safari 瀏覽，以獲得最佳體驗</h6>
+
+        <p>
+            © 2026 訊誆｜4人團隊獨立開發
+        </p>
+
+        <p>
+            playframegame@gmail.com
+        </p>
+
     </footer>
+
 </body>
+
 </html>

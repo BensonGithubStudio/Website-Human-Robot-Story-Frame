@@ -1,357 +1,144 @@
-@font-face {
-  font-family: 'ChiayiFont';
-  src: url('../fonts/ChiayiCity.woff2') format('woff2'),
-       url('../fonts/ChiayiCity.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+/* ===== Hero (首頁特定) ===== */
+.hero {
+    height: 100vh;
 }
 
-/* ===== Scrollbar 滾動條樣式 ===== */
-::-webkit-scrollbar {
-    width: 5px;
-}
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-::-webkit-scrollbar-thumb {
-    background-color: #7F7F7F;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #3D3D3D;
+.hero video {
+    filter: brightness(.45) contrast(1.1) saturate(.8);
 }
 
-/* ===== 基本設定 ===== */
-body {
-    position: fixed;
-    font-family: 'ChiayiFont', sans-serif;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    background-color: #000000;
-    color: #333;
+.hero-overlay {
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,.7),
+        rgba(0,0,0,.2),
+        rgba(0,0,0,.95)
+    );
 }
 
-/* ===== 頁面載入 Logo 淡出動畫區塊 ===== */
-#logo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000000;
+.hero-subtitle {
+    color: #BFBFBF;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.hero h1 {
+    font-size: 7rem;
+    letter-spacing: 18px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px rgba(255,255,255,.15);
+}
+
+.hero-description {
+    color: #D0D0D0;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+/* ===== Buttons ===== */
+.hero-buttons {
     display: flex;
     justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 1;
-    transition: opacity 1s ease;
-}
-#logo.fade-out {
-    opacity: 0;
-}
-#logo img {
-    width: 175px;
-    height: auto;
+    gap: 20px;
 }
 
-/* ===== Header 區塊 ===== */
-header {
-    position: fixed;
+/* ===== Sections ===== */
+.content-section {
+    padding: 120px 10%;
+}
+
+.content-section h2 {
+    font-size: 4rem;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    letter-spacing: 10px;
+}
+
+.content-section p {
+    color: #CFCFCF;
+    line-height: 2;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+    max-width: 800px;
+}
+
+/* ===== Images & Grid ===== */
+.image-grid,
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.image-grid img {
     width: 100%;
-    height: 80px;
-    background-color: rgba(0, 0, 0, 1);
-    transition: background-color 0.5s ease;
-    color: #fff;
-    z-index: 3;
+    border-radius: 24px;
+    transition: .5s;
 }
 
-/* 標題左側圖示 */
-#title-image {
-    position: absolute;
-    top: 50%;
-    left: 30px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    z-index: 4;
-}
-#title-image img {
-    width: 55px;
-    height: auto;
+.image-grid img:hover {
+    transform: scale(1.03);
+    filter: brightness(1.1);
 }
 
-/* 標題文字與下載按鈕 */
-#main-title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 5em;
-    letter-spacing: 25px;
-    font-weight: 1000;
-    z-index: 2;
-}
-/*
-#sub-title {
-    position: absolute;
-    top: 42%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #C8C8C8;
-    font-size: 1.2em;
-    font-weight: 1000;
-    z-index: 2;
-}*/
-#download-button {
-    position: absolute;
-    top: 50%;
-    right: 30px;
-    transform: translateY(-50%);
-    padding: 10px 20px;
-    background-color: #0065D0;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    font-size: 0.8em;
-    font-weight: 800;
-    z-index: 4;
-    transition: background-color 0.5s ease, color 0.5s ease;
-}
-#download-button:hover {
-    background-color: #FFFFFF;
-    color: #0065D0;
+/* ===== Features ===== */
+.feature-card {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 40px;
+    border-radius: 24px;
+    transition: .4s;
 }
 
-/* ===== 封面影片區 ===== */
-.video-container {
-    display: none;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
+.feature-card:hover {
+    border-color: #00A3FF;
 }
 
-/* ===== 導覽列 ===== */
-nav {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    backdrop-filter: blur(10px);
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.8em;
-    font-weight: 800;
-    padding: 5px 10px;
-    border-radius: 5px;
+.feature-card h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
 }
 
-/* ===== 各段內容區 ===== */
-section {
-    padding: 20px;
-    margin: 20px 50px;
-    border-radius: 25px;
+/* ===== Download Section (首頁底部) ===== */
+.download-section {
+    padding: 140px 10%;
+    text-align: center;
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,.02),
+        rgba(255,255,255,.01)
+    );
 }
 
-/* 動畫進場標題與段落 */
-h2, p {
-    display: none;
-    opacity: 0;
-    transform: translateY(80px);
-    transition: opacity 1.5s ease, transform 1.5s ease;
+.download-section h2 {
+    font-size: 4rem;
+    margin-bottom: 30px;
 }
-h2 {
-    color: #FFFFFF;
-    font-size: 3.5em;
-    letter-spacing: 9px;
-    font-weight: 1000;
-}
-p {
+
+.download-section p {
     color: #BFBFBF;
-    font-weight: 700;
-    letter-spacing: 7px;
-    font-family: 'Tagesschrift', 'LXGW WenKai TC', sans-serif;
-}
-h2.visible, p.visible {
-    opacity: 1;
-    transform: translateY(0);
-    display: block;
+    margin-bottom: 40px;
 }
 
-/* 了解更多連結樣式 */
-.hidden {
-    display: none;
-}
-.link-style {
-    right: 65px;
-    width: 150px;
-    background-color: transparent;
-    cursor: pointer;
-    float: right;
-}
-.link-style a {
-    color: #BFBFBF;
-    font-weight: 700;
-    text-decoration: underline;
-    display: inline-block;
-    transition: transform 0.25s ease;
-}
-.link-style a:hover {
-    transform: scale(1.2);
-}
-
-/* ===== 圖片區塊設定 ===== */
-#scene-image {
-    padding: 20px;
-    text-align: center;
-}
-#scene-image img {
-    margin: 15px 1%;
-    width: 45%;
-    height: auto;
-    border-radius: 25px;
-    transition: transform 0.5s ease;
-}
-#scene-image img:hover {
-    transform: scale(1.1);
-}
-
-/* 人類與機器人圖片區 */
-#human-robot {
-    overflow: hidden;
-    background-color: transparent;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    height: 650px;
-}
-#human-robot-left,
-#human-robot-right {
-    position: absolute;
-    bottom: 0%;
-    width: 100%;
-    transition: transform 0.5s ease;
-}
-#human-robot-left {
-    left: 0%;
-    clip-path: polygon(0% 0%, 0 100%, 50.8% 100%, 53.6% 48%, 48.8% 48%, 50.8% 0%);
-}
-#human-robot-right {
-    right: 0%;
-    clip-path: polygon(100% 0%, 100% 100%, 49.2% 100%, 51.9% 51.3%, 47% 51.3%, 49.2% 0%);
-}
-#human-robot-left:hover,
-#human-robot-right:hover {
-    transform: scale(1.1);
-}
-
-/* 角色展示圖 */
-#character-image {
-    overflow: hidden;
-    background-color: transparent;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-#character-image img {
-    width: 22%;
-    height: auto;
-	margin-right: 3%;
-	margin-left: 3%;
-    border: 5px solid #FFFFFF;
-    border-radius: 25px;
-    transition: transform 0.5s ease;
-}
-#character-image img:hover {
-    transform: scale(1.05);
-}
-
-/* ===== 頁尾 ===== */
-footer {
-    width: 100%;
-    background-color: #222222;
-    color: #FFFFFF;
-    text-align: center;
-    padding: 10px 0;
-}
-
-/* ===== 響應式：手機或小螢幕 ===== */
-@media (max-width: 768px) {
-    body {
-        font-size: 14px;
+/* ===== Index Mobile RWD ===== */
+@media(max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem;
+        letter-spacing: 8px;
     }
 
-    #main-title {
-        font-size: 1.5em;
-        letter-spacing: 10px;
+    .hero-subtitle {
+        font-size: .8rem;
     }
 
-    /* 
-	#sub-title {
-        font-size: 0.9em;
-    } 
-	*/
-
-	section {
-		padding: 20px;
-		padding-left: 0px;
-		padding-right: 0px;
-		margin: 5px 25px;
-		border-radius: 25px;
-	}
-
-    h2 {
-        font-size: 2em;
+    .content-section h2,
+    .download-section h2 {
+        font-size: 2.5rem;
     }
 
-    p {
-        font-size: 0.7em;
-        letter-spacing: 4.5px;
-    }
-
-	nav ul li {
-		display: inline;
-		margin: 0 0px;
-	}
-
-    nav ul li a {
-        font-size: 0.5em;
-    }
-
-    #download-button {
-        font-size: 0.7em;
-        padding: 8px 14px;
-    }
-
-	.link-style {
-		right: 0px;
-	}
-
-    .link-style a {
-        font-size: 0.9em;
+    .image-grid,
+    .feature-grid {
+        grid-template-columns: 1fr;
     }
 }
-

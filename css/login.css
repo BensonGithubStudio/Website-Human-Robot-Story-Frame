@@ -1,0 +1,238 @@
+/* =========================================================
+   LOGIN PAGE
+========================================================= */
+
+.login-page{
+    position:relative;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:120px 20px 60px;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.login-background{
+    position:fixed;
+
+    inset:0;
+
+    z-index:-2;
+
+    background:
+    radial-gradient(
+        circle at center,
+        rgba(0,132,255,.12),
+        transparent 60%
+    );
+}
+
+.background-glow{
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    width:700px;
+    height:700px;
+
+    transform:translate(-50%,-50%);
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(0,132,255,.15),
+        transparent 70%
+    );
+
+    filter:blur(80px);
+}
+
+/* =========================================================
+   LOGIN PANEL
+========================================================= */
+
+.login-panel{
+    width:100%;
+    max-width:480px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    border-radius:32px;
+
+    padding:50px;
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 0 60px rgba(0,132,255,.08);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* 上方科技線 */
+
+.login-panel::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:2px;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        #00A3FF,
+        transparent
+    );
+}
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.login-panel h1{
+    font-size:3.2rem;
+
+    letter-spacing:10px;
+
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.login-description{
+    color:#BFBFBF;
+
+    line-height:1.8;
+
+    margin-bottom:40px;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.login-form{
+    display:flex;
+    flex-direction:column;
+
+    gap:25px;
+}
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+
+    gap:12px;
+}
+
+.input-group label{
+    color:#8A8A8A;
+
+    font-size:.8rem;
+
+    letter-spacing:3px;
+}
+
+.input-group input{
+    width:100%;
+
+    padding:16px 18px;
+
+    border-radius:16px;
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    background:
+    rgba(255,255,255,.03);
+
+    color:white;
+
+    font-size:1rem;
+
+    outline:none;
+
+    transition:.3s;
+}
+
+.input-group input:focus{
+    border-color:#00A3FF;
+
+    box-shadow:
+    0 0 20px rgba(0,163,255,.2);
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.login-submit{
+    margin-top:10px;
+
+    border:none;
+
+    cursor:pointer;
+
+    font-size:.95rem;
+
+    letter-spacing:3px;
+}
+
+/* =========================================================
+   EXTRA LINKS
+========================================================= */
+
+.login-extra{
+    margin-top:30px;
+
+    display:flex;
+    justify-content:space-between;
+}
+
+.login-extra a{
+    color:#8A8A8A;
+
+    text-decoration:none;
+
+    transition:.3s;
+}
+
+.login-extra a:hover{
+    color:#00A3FF;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:768px){
+
+    .login-panel{
+        padding:35px 25px;
+    }
+
+    .login-panel h1{
+        font-size:2.2rem;
+
+        letter-spacing:6px;
+    }
+
+}
