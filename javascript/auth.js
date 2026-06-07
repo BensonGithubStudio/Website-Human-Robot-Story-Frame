@@ -1,6 +1,6 @@
 const user = JSON.parse(localStorage.getItem("user"));
 
-const userActions = document.getElementById("user-actions");
+const userActions = document.querySelector("user-actions");
 
 if(user){
     userActions.innerHTML = `
