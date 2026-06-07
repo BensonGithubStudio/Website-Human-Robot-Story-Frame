@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbywlPCxT1cqr5uDpoy-t6Oj0Kq4b03z0n5U2JowWWhj72rNPoimbceRqq-l5bmBTaDUfw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbx0faGQllAJHMXHp_eWfFJLXDBvYwuqOKIw0uVpSnEH5k3jgVC9gsW-xEhJuWvv9YdS2g/exec";
 
 /* ======================================================
    REGISTER SYSTEM
@@ -20,7 +20,7 @@ form.addEventListener("submit", async (e) => {
     }
 
     submitBtn.disabled = true;
-    submitBtn.innerText = "CREATING...";
+    submitBtn.innerText = "註冊中...";
     submitBtn.style.opacity = "0.6";
     submitBtn.style.cursor = "not-allowed";
 
