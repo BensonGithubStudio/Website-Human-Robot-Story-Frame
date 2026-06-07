@@ -64,7 +64,7 @@ form.addEventListener("submit", async (e)=>{
 
 function resetSubmitButton() {
     submitBtn.disabled = false;
-    submitBtn.innerText = "CONNECT";
+    submitBtn.innerText = "登入";
     submitBtn.style.opacity = "1";
     submitBtn.style.cursor = "pointer";
 }

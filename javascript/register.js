@@ -41,7 +41,6 @@ form.addEventListener("submit", async (e) => {
         console.log(result);
 
         if (result.success) {
-            alert("帳號註冊成功！將為您導向登入頁面。");
             window.location.href = "login.html";
         } else {
             alert(result.message);
@@ -57,7 +56,7 @@ form.addEventListener("submit", async (e) => {
 
 function resetSubmitButton() {
     submitBtn.disabled = false;
-    submitBtn.innerText = "CREATE ACCOUNT";
+    submitBtn.innerText = "註冊帳號";
     submitBtn.style.opacity = "1";
     submitBtn.style.cursor = "pointer";
 }
