@@ -90,6 +90,10 @@ nav a:hover {
     gap: 15px;
 }
 
+.menu-toggle, .mobile-nav-panel {
+    display: none;
+}
+
 /* ===== Button ===== */
 
 .login-btn,
@@ -185,15 +189,119 @@ footer p {
 
 /* ===== Global RWD ===== */
 @media(max-width: 768px) {
-    header {
-        padding: 0 20px;
+    
+    /* 隱藏桌機版的組件，防止撐開 Header */
+    .desktop-nav, .desktop-only {
+        display: none !important;
     }
 
-    nav {
+    header {
+        padding: 0 20px;
+        height: 70px;
+    }
+
+    /* 顯示漢堡按鈕 */
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 26px;
+        height: 18px;
+        cursor: pointer;
+        z-index: 102;
+    }
+
+    .menu-toggle .bar {
+        height: 2px;
+        width: 100%;
+        background-color: white;
+        transition: 0.3s;
+    }
+    
+    /* 霓虹發光效果 */
+    .menu-toggle:hover .bar {
+        background-color: #00A3FF;
+        box-shadow: 0 0 8px #00A3FF;
+    }
+
+    /* 手機版側邊面板主體 */
+    .mobile-nav-panel {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0; /* 改從左邊滑出，與右側的購物車做視覺平衡 */
+        width: 280px;
+        height: 100vh;
+        background: #09090e;
+        border-right: 1px solid rgba(0, 163, 255, 0.2);
+        z-index: 1005;
+        flex-direction: column;
+        padding: 30px;
+        transform: translateX(-100%); /* 預設隱藏在左側螢幕外 */
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mobile-nav-panel.active {
+        transform: translateX(0);
+        box-shadow: 10px 0 40px rgba(0, 163, 255, 0.08);
+    }
+
+    .mobile-nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+    }
+
+    .close-menu {
+        background: transparent;
+        border: none;
+        color: #888;
+        font-size: 2rem;
+        cursor: pointer;
+        line-height: 1;
+    }
+    .close-menu:hover { color: #FF4646; }
+
+    /* 手機版連結直向排列 */
+    .mobile-links {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        flex-grow: 1;
+    }
+
+    .mobile-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+        transition: 0.3s;
+    }
+    .mobile-links a:hover { color: #00A3FF; padding-left: 5px; }
+
+    /* 🌟 手機版玩家名字獨立特區：直向安全排列，絕對不破版 */
+    .mobile-user-zone {
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
         gap: 15px;
     }
 
-    nav a {
-        font-size: .7rem;
+    .mobile-user-zone span {
+        font-size: 0.95rem;
+        color: #00A3FF;
+        word-break: break-all; /* 即使名字帶有超長英文或特殊符號，也會自動換行不爆框 */
+        text-shadow: 0 0 10px rgba(0, 163, 255, 0.3);
+    }
+
+    .mobile-user-zone .login-btn,
+    .mobile-user-zone .member-btn {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
     }
 }
