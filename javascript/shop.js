@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const API_URL = "https://script.google.com/macros/s/AKfycbzuBIdaM1KXP6O-WmZdyWkZ3NyQl-WLvh3W8aOywHfqZv15QKheF1iu9LHLH5Xt0U7pSw/exec"; 
+    const API_URL = "https://script.google.com/macros/s/AKfycbxo3ykgDQ5X0Bf4H3JGleXvQPfc2hzDCpwXGdMMkBOVqM8QOdHA-k8p_fdMSZ6PGlLp0w/exec"; 
 
     // 購物車側邊欄切換元素
     const cartToggle = document.getElementById("cart-toggle");

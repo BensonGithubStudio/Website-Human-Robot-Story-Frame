@@ -1,0 +1,190 @@
+:root {
+    --bg-color: #0d0f12;
+    --panel-bg: #14181f;
+    --text-color: #e2e8f0;
+    --primary-blue: #00A3FF;
+    --alert-red: #FF4646;
+    --border-color: rgba(255, 255, 255, 0.08);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace, "Microsoft JhengHei";
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+h1 { color: var(--primary-blue); margin: 0; font-size: 1.8rem; }
+
+.logout-btn {
+    background: transparent; border: 1px solid var(--alert-red); color: var(--alert-red);
+    padding: 6px 15px; cursor: pointer; border-radius: 4px;
+}
+.logout-btn:hover { background: rgba(255, 70, 70, 0.1); }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+@media (min-width: 992px) {
+    .grid-container { grid-template-columns: 45% 55%; }
+}
+
+.panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+h2 { border-left: 4px solid var(--primary-blue); padding-left: 10px; font-size: 1.3rem; margin-top: 0; }
+
+table {
+    width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9rem;
+}
+
+th, td {
+    border: 1px solid var(--border-color); padding: 10px; text-align: left;
+}
+
+th { background: rgba(0, 163, 255, 0.1); color: var(--primary-blue); }
+tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+.stock-input {
+    width: 60px; background: #000; border: 1px solid #444; color: #fff;
+    padding: 4px; text-align: center; border-radius: 4px;
+}
+
+.save-btn {
+    background: var(--primary-blue); border: none; color: #000; font-weight: bold;
+    padding: 4px 10px; cursor: pointer; border-radius: 4px; margin-left: 5px;
+    transition: background 0.2s ease;
+}
+.save-btn:hover { background: #0082cc; }
+
+.badge-order { background: rgba(0, 163, 255, 0.2); color: var(--primary-blue); padding: 2px 6px; border-radius: 4px; }
+.loading { color: #ffb800; text-align: center; padding: 20px; }
+
+
+/* ======================================================
+   🌟 全新 RWD 手機版介面優化（小於 768px 生效）
+====================================================== */
+@media (max-width: 767px) {
+    body {
+        padding: 10px; /* 縮小網頁邊距，留給主要內容更多空間 */
+    }
+
+    header {
+        flex-direction: column; /* 標頭改成上下排列 */
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    header div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%; /* 讓管理員名稱與回首頁按鈕左右貼齊 */
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .panel {
+        padding: 15px 10px; /* 縮小面板內邊距 */
+    }
+
+    /* 核心精髓：強行將 Table 結構打破成區塊（Block） */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    /* 隱藏傳統表格標頭（因為改用卡片顯示，標頭會亂掉） */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    /* 將表格的每一列（tr）改成獨立的「卡片」 */
+    tbody tr {
+        border: 1px solid var(--border-color);
+        background: rgba(255, 255, 255, 0.01) !important;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        padding: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 移除儲存格（td）原有的邊框，改成上下排列，並增加上下間距 */
+    td {
+        border: none;
+        padding: 6px 4px;
+        position: relative;
+        text-align: left;
+    }
+
+    /* --- 針對「庫存監控」表格的特別調整 --- */
+    #products-table td {
+        display: flex;
+        justify-content: space-between; /* 讓名稱與數值分居左右 */
+        align-items: center;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.05); /* 輕微虛線分隔 */
+    }
+    
+    #products-table td:last-child {
+        border-bottom: none;
+        padding-top: 10px;
+        justify-content: flex-end; /* 按鈕移到右下角方便點擊 */
+    }
+
+    /* 利用 CSS :before 在左側加上標籤提示（動態補足隱藏 thead 的遺憾） */
+    #products-table td:nth-of-type(1):before { content: "商品編碼："; color: #888; font-size: 0.8rem; }
+    #products-table td:nth-of-type(2):before { content: "商品名稱："; color: #888; font-size: 0.8rem; }
+    #products-table td:nth-of-type(3):before { content: "商品單價："; color: #888; font-size: 0.8rem; }
+    #products-table td:nth-of-type(4):before { content: "當前庫存："; color: #888; font-size: 0.8rem; }
+
+    /* 調整輸入框與更新按鈕在手機上的尺寸，更好點擊 */
+    .stock-input {
+        width: 70px;
+        padding: 6px;
+        font-size: 1rem;
+    }
+
+    .save-btn {
+        padding: 6px 16px;
+        font-size: 0.95rem;
+    }
+
+    /* --- 針對「即時物流訂單」表格的特別調整 --- */
+    #orders-table tbody tr {
+        border-left: 3px solid var(--primary-blue); /* 給訂單卡片左側加一條藍色識別線 */
+    }
+
+    #orders-table td {
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+    }
+
+    #orders-table td:last-child {
+        border-bottom: none;
+        display: flex;
+        justify-content: space-between; /* 金額與刪除按鈕分開 */
+        align-items: center;
+        padding-top: 10px;
+    }
+}

@@ -8,17 +8,26 @@ const mobileUserActions = document.getElementById("mobile-user-actions");
 if (user) {
     const displayName = user.name || user.account || "會員";
 
+    // 🌟 核心增強：檢查是否為管理員，若是則生成一個指向 admin.html 的按鈕
+    let adminLinkHtml = "";
+    if (user.role === "admin") {
+        // 這裡設定管理控制台按鈕的樣式，使用 font-weight 與橘黃色/藍色等與普通按鈕區隔（可依外觀自行調整 CSS 類名）
+        adminLinkHtml = `<a href="admin.html" class="login-btn" style="border-color: #ffb800; color: #ffb800; margin-right: 10px;">控制台</a>`;
+    }
+
     if (desktopUserActions) {
         desktopUserActions.innerHTML = `
             <span class="welcome-text">哈嘍，${displayName}</span>
-            <a href="#" id="logout-btn" class="login-btn">登出</a>
+            ${adminLinkHtml} <a href="#" id="logout-btn" class="login-btn">登出</a>
         `;
     }
 
     if (mobileUserActions) {
         mobileUserActions.innerHTML = `
             <span>哈嘍，${displayName}</span>
-            <a href="#" id="mobile-logout-btn" class="login-btn"">登出</a>
+            <div style="margin-top: 10px; display: flex; gap: 10px; justify-content: center;">
+                ${adminLinkHtml} <a href="#" id="mobile-logout-btn" class="login-btn">登出</a>
+            </div>
         `;
     }
 

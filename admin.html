@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黑市終端 - 核心管理後台</title>
+
+    <link rel="stylesheet" href="css/adminStyles.css">
+
+    <script src="javascript/admin.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>核心控制台</h1>
+        <div>
+            <span id="admin-name" style="margin-right: 15px; color: #888;"></span>
+            <button class="logout-btn" onclick="location.href='index.html'">回首頁</button>
+        </div>
+    </header>
+
+    <div class="grid-container">
+        <div class="panel">
+            <h2>庫存監控與商品補充</h2>
+            <div id="products-loading" class="loading">正在同步商品清單...</div>
+            <table id="products-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>商品編碼</th>
+                        <th>商品名稱</th>
+                        <th>商品單價</th>
+                        <th>當前庫存</th>
+                        <th>變更庫存</th>
+                    </tr>
+                </thead>
+                <tbody id="products-list"></tbody>
+            </table>
+        </div>
+
+        <div class="panel">
+            <h2>即時物流訂單監控</h2>
+            <div id="orders-loading" class="loading">正在連線至加密傳輸節點...</div>
+            <table id="orders-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>流水/時間</th>
+                        <th>買家與收件資訊</th>
+                        <th>購買明細</th>
+                        <th>金額/折扣</th>
+                    </tr>
+                </thead>
+                <tbody id="orders-list"></tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
