@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const API_URL = "https://script.google.com/macros/s/AKfycbwAzaLSzaNKE28jdL-E8CXsUVbBE7BOVlTI0fx2_p0jb-nlIfdKJXJnjWZfzcKykDIjJA/exec"; 
+    const API_URL = "https://script.google.com/macros/s/AKfycbzuBIdaM1KXP6O-WmZdyWkZ3NyQl-WLvh3W8aOywHfqZv15QKheF1iu9LHLH5Xt0U7pSw/exec"; 
 
     // 購物車側邊欄切換元素
     const cartToggle = document.getElementById("cart-toggle");
@@ -18,8 +18,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const cancelBtn = document.getElementById("modal-cancel");
     const confirmBtn = document.getElementById("modal-confirm");
 
+    // 折扣碼專區 UI 元素
+    const promoApplyBtn = document.getElementById("promo-apply-btn");
+    const promoInput = document.getElementById("promo-code");
+    const promoMsg = document.getElementById("promo-msg");
+
     // 初始化購物車
     let cart = JSON.parse(localStorage.getItem("shopping-cart")) || [];
+
+    // 折扣碼相關控制全域變數（由雲端 API 回傳後動態賦值）
+    let currentDiscountRate = 1.0;  // 預設不打折
+    let currentDiscountMinus = 0;   // 預設不扣固定金額
+    let activePromoCode = "";       // 當前生效的折扣碼
 
     // 初始化畫面渲染
     updateCartUI();
@@ -48,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const user = JSON.parse(localStorage.getItem("user"));
             if (!user) {
-                alert("請先登入黑市終端系統。");
+                alert("請先登入系統。");
                 window.location.href = "login.html";
                 return;
             }
@@ -72,16 +82,26 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateCartUI() {
         cartItemsContainer.innerHTML = "";
         const shippingZone = document.getElementById("cart-shipping-zone");
+        const promoZone = document.getElementById("cart-promo-zone"); 
 
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = `<p class="empty-msg">尚無購物資料...</p>`;
             cartCountBadge.innerText = "0";
             cartTotalText.innerText = "NT$ 0";
             if(shippingZone) shippingZone.style.display = "none";
+            if(promoZone) promoZone.style.display = "none"; 
+            
+            // 購物車空了，重設所有折扣碼與輸入狀態
+            currentDiscountRate = 1.0;
+            currentDiscountMinus = 0;
+            activePromoCode = "";
+            if (promoInput) promoInput.value = "";
+            if (promoMsg) promoMsg.innerText = "";
             return;
         }
 
         if(shippingZone) shippingZone.style.display = "block";
+        if(promoZone) promoZone.style.display = "block"; 
 
         let totalItemsCount = 0;
         let totalPriceSum = 0;
@@ -106,10 +126,80 @@ document.addEventListener("DOMContentLoaded", () => {
             cartItemsContainer.appendChild(itemElement);
         });
 
+        // 計算折抵後的最終金額
+        let finalPrice = Math.round(totalPriceSum * currentDiscountRate) - currentDiscountMinus;
+        if (finalPrice < 0) finalPrice = 0; // 防止折到變負數
+
         cartCountBadge.innerText = totalItemsCount;
-        cartTotalText.innerText = `NT$ ${totalPriceSum}`;
+
+        // UI 金額呈現：如果有使用折扣碼，加上原價刪除線提示
+        if (activePromoCode) {
+            cartTotalText.innerHTML = `<span style="font-size:0.85rem; color:#888; text-decoration:line-through; margin-right:8px; font-weight:normal;">NT$ ${totalPriceSum}</span>NT$ ${finalPrice}`;
+        } else {
+            cartTotalText.innerText = `NT$ ${finalPrice}`;
+        }
 
         addAmountModifiers();
+    }
+
+    /* ==========================================
+       🌟 核心修改：向雲端試算表 Discount 分頁驗證折扣
+    ========================================== */
+    if (promoApplyBtn && promoInput && promoMsg) {
+        promoApplyBtn.addEventListener("click", () => {
+            const code = promoInput.value.trim().toUpperCase(); // 自動轉大寫防錯
+            
+            if (!code) {
+                promoMsg.style.color = "#FF4646";
+                promoMsg.innerText = "請輸入折扣碼。";
+                return;
+            }
+
+            promoMsg.style.color = "#FFB800";
+            promoMsg.innerText = "正在向系統驗證折扣授權中...";
+
+            // 向 GAS 的動態驗證介面發送 POST 請求
+            fetch(API_URL, {
+                method: "POST",
+                body: JSON.stringify({
+                    action: "verifyPromoCode",
+                    promoCode: code
+                })
+            })
+            .then(res => res.json())
+            .then(response => {
+                if (response.success) {
+                    // 雲端資料庫驗證成功，提取對應的折扣設定並即時重繪畫面
+                    activePromoCode = response.promo.code;
+
+                    if (response.promo.type === "rate") {
+                        currentDiscountRate = response.promo.value;
+                        currentDiscountMinus = 0;
+                    } else if (response.promo.type === "minus") {
+                        currentDiscountRate = 1.0;
+                        currentDiscountMinus = response.promo.value;
+                    }
+
+                    promoMsg.style.color = "#00A3FF"; 
+                    promoMsg.innerText = response.promo.label; // 顯示試算表上設定的說明文字
+                    updateCartUI(); 
+                } else {
+                    // 驗證失敗則顯示後端傳回的錯誤訊息，並還原折扣
+                    promoMsg.style.color = "#FF4646"; 
+                    promoMsg.innerText = response.message;
+                    
+                    currentDiscountRate = 1.0;
+                    currentDiscountMinus = 0;
+                    activePromoCode = "";
+                    updateCartUI();
+                }
+            })
+            .catch(err => {
+                console.error("折扣驗證連線失敗：", err);
+                promoMsg.style.color = "#FF4646";
+                promoMsg.innerText = "連線失敗，無法取得雲端授權驗證。";
+            });
+        });
     }
 
     /* ==========================================
@@ -198,23 +288,25 @@ document.addEventListener("DOMContentLoaded", () => {
         const address = document.getElementById("ship-address").value.trim();
 
         if (!name || !phone || !city || !district || !address) {
-            alert("【核心錯誤】請在購物車內填妥完整的配送資料。");
+            alert("請在購物車內填妥完整的配送資料。");
             return;
         }
         if (phone.length < 9) {
-            alert("【通訊錯誤】請輸入正確的聯絡電話。");
+            alert("請輸入正確的聯絡電話。");
             return;
         }
 
         validatedShippingInfo = { name, phone, fullAddress: `${city}${district}${address}` };
 
-        // 🌟 修正點 1：每次打開結帳彈窗時，必須初始化按鈕狀態，防範上一次失敗留下的狀態
         confirmBtn.style.display = "inline-block"; 
         cancelBtn.disabled = false;
         cancelBtn.innerText = "再想想";
 
         modalTitle.innerText = "訂單確認";
         const msgContainer = document.getElementById("modal-msg-container");
+        
+        const finalPriceText = cartTotalText.textContent || cartTotalText.innerText;
+
         msgContainer.innerHTML = `
             <p style="margin-bottom: 15px;">確認要送出這筆訂單嗎？</p>
             <div style="color: #ccc; font-size: 0.85rem; text-align: left; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 6px; border: 1px solid rgba(255,70,70,0.2); line-height: 1.6;">
@@ -222,7 +314,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 帳號：${user.account}<br>
                 收件人：${name} (${phone})<br>
                 目的地：<span style="color:#00A3FF;">${city}${district}${address}</span><br>
-                總金額：<span style="color:#FF4646; font-weight:bold;">${cartTotalText.innerText}</span>
+                ${activePromoCode ? `已套用代碼：<span style="color:#FFB800; font-family:monospace;">${activePromoCode}</span><br>` : ""}
+                總金額：<span style="color:#FF4646; font-weight:bold;">${finalPriceText}</span>
             </div>
         `;
 
@@ -242,23 +335,25 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // 1. 調整畫面為「正在傳輸中...」防止重複點擊
         modalTitle.innerText = "建立連線中...";
         const msgContainer = document.getElementById("modal-msg-container");
         msgContainer.innerHTML = `<p style="color: #FFB800;">正在與後端終端建立安全連線，請稍候...</p>`;
         confirmBtn.style.display = "none";
-        cancelBtn.disabled = true; // 修正：應使用屬性形式 disabled = true 暫時停用取消鈕
+        cancelBtn.disabled = true; 
 
-        // 2. 打包要傳送給試算表後台的完整 JSON 結構
+        const finalPriceText = cartTotalText.textContent || cartTotalText.innerText;
+
+        // 打包要傳送給試算表後台的完整 JSON 結構
         const orderPayload = {
             action: "submitOrder",
             userAccount: user.account,
-            totalPrice: cartTotalText.innerText,
+            totalPrice: finalPriceText, 
+            promoCode: activePromoCode, // 🌟 傳遞當前使用的折扣碼給後端進行二次校對
             shipping: validatedShippingInfo,
-            cart: cart // 內含物件陣列：[{id, name, price, quantity}, ...]
+            cart: cart 
         };
 
-        // 3. 發送非同步 POST 請求至 Google 試算表
+        // 發送非同步 POST 請求至 Google 試算表
         fetch(API_URL, {
             method: "POST",
             body: JSON.stringify(orderPayload)
@@ -266,7 +361,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(response => {
             if (response.success) {
-                // 【情境 A：後台扣減庫存 & 寫入訂單成功】
                 modalTitle.innerText = "訂單送出";
                 msgContainer.innerHTML = `
                     <p style="color: #00A3FF; font-weight: bold; margin-bottom: 10px;">${response.message}</p>
@@ -276,8 +370,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 cancelBtn.disabled = false;
                 cancelBtn.innerText = "關閉";
 
-                // 交易成功，清空前端購物車緩存
+                // 交易成功，清空前端購物車緩存與折扣狀態
                 cart = [];
+                currentDiscountRate = 1.0;
+                currentDiscountMinus = 0;
+                activePromoCode = "";
+                if (promoInput) promoInput.value = "";
+                if (promoMsg) promoMsg.innerText = "";
+
                 saveCart();
                 updateCartUI();
 
@@ -297,28 +397,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 }, 4000);
 
             } else {
-                // 【情境 B：後台傳回失敗（例如：庫存不足）】
                 modalTitle.innerText = "交易被拒絕";
                 msgContainer.innerHTML = `
                     <p style="color: #FF4646; font-weight: bold; margin-bottom: 10px;">系統回報錯誤：</p>
                     <p style="color: #fff; font-size: 0.9rem;">${response.message}</p>
                 `;
                 
-                // 🌟 修正點 2：當後端拒絕時，允許使用者點擊「返回修改」，這時要把取消按鈕啟用
                 cancelBtn.disabled = false;
                 cancelBtn.innerText = "返回修改";
-                
-                // 註：這裡我們保持 confirmBtn 隱藏，強迫使用者必須點「返回修改」去購物車調整數量。
-                // 當他們重新點擊「結帳」按鈕時，上面的「修正點 1」就會把確認購買按鈕重新顯示出來！
             }
         })
         .catch(err => {
-            // 【情境 C：網路斷線或網址設定錯誤】
             console.error("傳輸失敗：", err);
             modalTitle.innerText = "連線失敗";
             msgContainer.innerHTML = `<p style="color: #FF4646;">連線逾時或網路異常，請確認你的 API_URL 是否正確，或稍後再試。</p>`;
             
-            // 🌟 修正點 3：連線失敗時，也要恢復確認按鈕與取消按鈕，允許重試
             confirmBtn.style.display = "inline-block";
             cancelBtn.disabled = false;
             cancelBtn.innerText = "確認";

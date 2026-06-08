@@ -107,6 +107,36 @@
                     </div>
                 </div>
             </div>
+
+            <div class="product-card" data-id="p4" data-name="明信片" data-price="35">
+                <div class="product-img">
+                    <img src="images/Shop/Shop-3.webp" alt="明信片" onerror="this.src='https://placehold.co/400x400/0f0f15/00A3FF?text=POSTCARD'">
+                </div>
+                <div class="product-info">
+                    <span class="prod-tag">明信片</span>
+                    <h3>明信片</h3>
+                    <p class="prod-desc">獨家《訊誆》終端機發光條紋設計，低阻力表面，精密追蹤 AI 的動向。</p>
+                    <div class="prod-footer">
+                        <span class="price">NT$ 35</span>
+                        <button class="buy-btn">加入購物車</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-id="p5" data-name="明信片" data-price="35">
+                <div class="product-img">
+                    <img src="images/Shop/Shop-3.webp" alt="明信片" onerror="this.src='https://placehold.co/400x400/0f0f15/00A3FF?text=POSTCARD'">
+                </div>
+                <div class="product-info">
+                    <span class="prod-tag">明信片</span>
+                    <h3>明信片</h3>
+                    <p class="prod-desc">獨家《訊誆》終端機發光條紋設計，低阻力表面，精密追蹤 AI 的動向。</p>
+                    <div class="prod-footer">
+                        <span class="price">NT$ 35</span>
+                        <button class="buy-btn">加入購物車</button>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -118,6 +148,15 @@
         
         <div class="cart-items" id="cart-items">
             <p class="empty-msg">尚無購物資料...</p>
+        </div>
+
+        <div class="cart-promo-zone" id="cart-promo-zone" style="display: none; padding: 12px 0; border-bottom: 1px dashed rgba(0, 163, 255, 0.3); margin-bottom: 12px;">
+            <span class="section-tag" style="font-size: 0.7rem; margin-bottom: 8px; display: block;">折扣授權碼</span>
+            <div style="display: flex; gap: 8px;">
+                <input type="text" id="promo-code" placeholder="輸入折扣代碼 (例: FRAUD88)" style="flex: 1; padding: 6px 10px; background: rgba(0,0,0,0.6); border: 1px solid #00A3FF; color: #fff; border-radius: 4px; font-family: monospace; font-size: 0.85rem;">
+                <button id="promo-apply-btn" style="padding: 6px 15px; background: #00A3FF; border: none; color: #000; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 0.85rem; transition: background 0.2s;">套用</button>
+            </div>
+            <p id="promo-msg" style="font-size: 0.75rem; margin-top: 5px; min-height: 1.1rem; color: #FFB800; font-family: monospace; margin-bottom: 0;"></p>
         </div>
 
         <div class="cart-shipping-zone" id="cart-shipping-zone" style="display: none;">
