@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbzdhuI67X9DG1dzij262UHzo6RH5x3D31PHYDrladOI8yfknGpDLy-fXRvN2dg4AsHwNA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyIDFIATJELVgP7XQ70Q5lZzlKsSk1KBYF3hktki3S7KbM719eLANN7Z9Z7EzEoLEKEPA/exec";
 
 /* ======================================================
    FORGOT / RESET PASSWORD SYSTEM

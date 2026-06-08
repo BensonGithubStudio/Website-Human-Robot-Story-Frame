@@ -1,8 +1,6 @@
-/* ======================================================
-   訊誆商城 TERMINAL LOGIC + SHOPPING CART SYSTEM
-====================================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
+    const API_URL = "https://script.google.com/macros/s/AKfycbyIDFIATJELVgP7XQ70Q5lZzlKsSk1KBYF3hktki3S7KbM719eLANN7Z9Z7EzEoLEKEPA/exec"; 
+
     // 購物車側邊欄切換元素
     const cartToggle = document.getElementById("cart-toggle");
     const cartClose = document.getElementById("cart-close");
@@ -210,6 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         validatedShippingInfo = { name, phone, fullAddress: `${city}${district}${address}` };
 
+        // 🌟 修正點 1：每次打開結帳彈窗時，必須初始化按鈕狀態，防範上一次失敗留下的狀態
+        confirmBtn.style.display = "inline-block"; 
+        cancelBtn.disabled = false;
+        cancelBtn.innerText = "再想想";
+
         modalTitle.innerText = "訂單確認";
         const msgContainer = document.getElementById("modal-msg-container");
         msgContainer.innerHTML = `
@@ -229,32 +232,96 @@ document.addEventListener("DOMContentLoaded", () => {
 
     cancelBtn.addEventListener("click", () => modal.classList.remove("active"));
 
+    /* 正式將訂單與扣庫存機制對接到試算表 */
     confirmBtn.addEventListener("click", () => {
         if (!validatedShippingInfo) return;
 
-        modalTitle.innerText = "訂單送出";
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) {
+            alert("登入逾期，請重新登入。");
+            return;
+        }
+
+        // 1. 調整畫面為「正在傳輸中...」防止重複點擊
+        modalTitle.innerText = "建立連線中...";
         const msgContainer = document.getElementById("modal-msg-container");
-        msgContainer.innerHTML = `
-            <p style="color: #00A3FF; font-weight: bold; margin-bottom: 10px;">訂單已成功送出</p>
-            <p style="font-size: 0.85rem; color: #888;">訂單準備送至：<br>${validatedShippingInfo.fullAddress}</p>
-        `;
-        
+        msgContainer.innerHTML = `<p style="color: #FFB800;">正在與後端終端建立安全連線，請稍候...</p>`;
         confirmBtn.style.display = "none";
-        cancelBtn.innerText = "關閉";
+        cancelBtn.disabled = true; // 修正：應使用屬性形式 disabled = true 暫時停用取消鈕
 
-        cart = [];
-        saveCart();
-        updateCartUI();
-        document.getElementById("shipping-form").reset();
-        if(districtSelect) districtSelect.disabled = true;
-        validatedShippingInfo = null;
+        // 2. 打包要傳送給試算表後台的完整 JSON 結構
+        const orderPayload = {
+            action: "submitOrder",
+            userAccount: user.account,
+            totalPrice: cartTotalText.innerText,
+            shipping: validatedShippingInfo,
+            cart: cart // 內含物件陣列：[{id, name, price, quantity}, ...]
+        };
 
-        setTimeout(() => {
-            modal.classList.remove("active");
-            setTimeout(() => {
-                confirmBtn.style.display = "inline-block";
-                cancelBtn.innerText = "再想想";
-            }, 300);
-        }, 4000);
+        // 3. 發送非同步 POST 請求至 Google 試算表
+        fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify(orderPayload)
+        })
+        .then(res => res.json())
+        .then(response => {
+            if (response.success) {
+                // 【情境 A：後台扣減庫存 & 寫入訂單成功】
+                modalTitle.innerText = "訂單送出";
+                msgContainer.innerHTML = `
+                    <p style="color: #00A3FF; font-weight: bold; margin-bottom: 10px;">${response.message}</p>
+                    <p style="font-size: 0.85rem; color: #888;">訂單編號：${response.orderId}<br>配送地址：${validatedShippingInfo.fullAddress}</p>
+                `;
+                
+                cancelBtn.disabled = false;
+                cancelBtn.innerText = "關閉";
+
+                // 交易成功，清空前端購物車緩存
+                cart = [];
+                saveCart();
+                updateCartUI();
+
+                // 重設配送欄位
+                const shippingForm = document.getElementById("shipping-form");
+                if (shippingForm) shippingForm.reset();
+                if (districtSelect) districtSelect.disabled = true;
+                validatedShippingInfo = null;
+
+                // 4 秒後自動關閉彈窗
+                setTimeout(() => {
+                    modal.classList.remove("active");
+                    setTimeout(() => {
+                        confirmBtn.style.display = "inline-block";
+                        cancelBtn.innerText = "再想想";
+                    }, 300);
+                }, 4000);
+
+            } else {
+                // 【情境 B：後台傳回失敗（例如：庫存不足）】
+                modalTitle.innerText = "交易被拒絕";
+                msgContainer.innerHTML = `
+                    <p style="color: #FF4646; font-weight: bold; margin-bottom: 10px;">系統回報錯誤：</p>
+                    <p style="color: #fff; font-size: 0.9rem;">${response.message}</p>
+                `;
+                
+                // 🌟 修正點 2：當後端拒絕時，允許使用者點擊「返回修改」，這時要把取消按鈕啟用
+                cancelBtn.disabled = false;
+                cancelBtn.innerText = "返回修改";
+                
+                // 註：這裡我們保持 confirmBtn 隱藏，強迫使用者必須點「返回修改」去購物車調整數量。
+                // 當他們重新點擊「結帳」按鈕時，上面的「修正點 1」就會把確認購買按鈕重新顯示出來！
+            }
+        })
+        .catch(err => {
+            // 【情境 C：網路斷線或網址設定錯誤】
+            console.error("傳輸失敗：", err);
+            modalTitle.innerText = "連線失敗";
+            msgContainer.innerHTML = `<p style="color: #FF4646;">連線逾時或網路異常，請確認你的 API_URL 是否正確，或稍後再試。</p>`;
+            
+            // 🌟 修正點 3：連線失敗時，也要恢復確認按鈕與取消按鈕，允許重試
+            confirmBtn.style.display = "inline-block";
+            cancelBtn.disabled = false;
+            cancelBtn.innerText = "確認";
+        });
     });
 });
