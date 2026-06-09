@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物紀錄｜訊誆</title>
+    
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/shopStyles.css">
+    <link rel="icon" href="images/logo.png">
+
+    <script src="javascript/auth.js" defer></script>
+    <script src="javascript/history.js" defer></script>
+</head>
+<body>
+    <div class="scanline"></div>
+
+    <header>
+        <a href="index.html#" class="logo">
+            <img src="images/logo.png" alt="訊誆 Logo">
+        </a>
+        <nav class="desktop-nav">
+            <a href="index.html#story">世界觀</a>
+            <a href="index.html#gallery">場景展示</a>
+            <a href="index.html#features">遊戲特色</a>
+            <a href="shop.html">訊誆商城</a>    
+            <a href="download.html">免費遊玩</a>
+        </nav>
+        <div class="user-actions desktop-only" id="user-actions"></div>
+
+        <div class="menu-toggle" id="menu-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </header>
+
+    <div class="mobile-nav-panel" id="mobile-nav-panel">
+        <div class="mobile-nav-header">
+            <span class="section-tag">FRAUD FRAME</span>
+            <button class="close-menu" id="menu-close">×</button>
+        </div>
+        <div class="mobile-links">
+            <a href="index.html#story">世界觀</a>
+            <a href="index.html#gallery">場景展示</a>
+            <a href="index.html#features">遊戲特色</a>
+            <a href="shop.html">訊誆商城</a>    
+            <a href="download.html">免費遊玩</a>
+        </div>
+        <div class="mobile-user-zone" id="mobile-user-actions">
+            <a href="login.html" class="login-btn">登入</a>
+            <a href="register.html" class="login-btn">註冊</a>
+        </div>
+    </div>
+
+    <main class="shop-container">
+        <div class="shop-header">
+            <span class="section-tag" style="color: #FFB800; border-color: rgba(255,184,0,0.3);">PURCHASE HISTORY</span>
+            <h1 style="text-shadow: 0 0 15px rgba(255, 184, 0, 0.2);">購買紀錄</h1>
+            <p class="shop-desc" id="user-display-terminal">身分驗證中...</p>
+        </div>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div id="history-loading" style="color: #FFB800; text-align: center; font-family: monospace; padding: 40px;">
+                正在連線...
+            </div>
+            
+            <div id="history-container" style="display: none;">
+                </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 訊誆 | 4人團隊獨立開發</p>
+        <p>playframegame@gmail.com</p>
+    </footer>
+</body>
+</html>

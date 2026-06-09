@@ -240,6 +240,40 @@
     border: 1px solid #050505;
 }
 
+/* ===== 浮動歷史紀錄圖示 ===== */
+.history-floating-btn {
+    position: fixed;
+    bottom: 105px; /* 剛好位於購物車(30px + 60px + 15px間距)的上方 */
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #0f0f15;
+    border: 1px solid #FFB800; /* 歷史紀錄專屬加密黃 */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(255, 184, 0, 0.2);
+}
+
+.history-floating-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: #FFB800;
+    box-shadow: 0 0 25px rgba(255, 184, 0, 0.6);
+}
+
+.history-floating-btn:hover .history-icon {
+    filter: brightness(0); /* 懸停時圖示變黑 */
+}
+
+.history-icon {
+    font-size: 1.5rem;
+    transition: filter 0.3s;
+}
+
 /* ===== 購物車側邊欄 ===== */
 .cart-sidebar {
     position: fixed;
