@@ -14,7 +14,6 @@ function checkUserAndLoadHistory() {
     const currentUser = JSON.parse(localStorage.getItem("user"));
 
     if (!currentUser || !currentUser.account) {
-        // 未登入處理
         userDisplay.innerHTML = `<span style="color: #FF4646;">【存取拒絕】偵測到未授權連線。請先登入系統。</span>`;
         historyLoading.innerHTML = `
             <button class="buy-btn" onclick="location.href='login.html'" style="border-color:#FF4646; color:#FF4646;">
@@ -24,10 +23,9 @@ function checkUserAndLoadHistory() {
         return;
     }
 
-    // 已登入，更換介面上的使用者提示
     userDisplay.innerHTML = `已成功連線。目前帳號：<span style="color: #FFB800; font-family: monospace;">${currentUser.account}</span>`;
 
-    // 2. 向後端發送請求，取得當前帳號的所有歷史訂單
+    // 2. 向後端發送請求
     fetch(API_URL, {
         method: "POST",
         body: JSON.stringify({
@@ -41,73 +39,79 @@ function checkUserAndLoadHistory() {
         historyContainer.style.display = "block";
 
         if (response.success && response.orders.length > 0) {
-            historyContainer.innerHTML = ""; // 清空
+            historyContainer.innerHTML = ""; 
 
             response.orders.forEach(order => {
                 const card = document.createElement("div");
                 
-                // 設定高度配合世界觀的賽博朋克終端卡片樣式
+                // 🌟 RWD 修正：為卡片加上特定的 class（配合全域或於此定義內距），並引入 CSS 變數或自適應
                 card.className = "product-card";
                 card.style.flexDirection = "column";
-                card.style.padding = "25px";
-                card.style.marginBottom = "25px";
+                card.style.marginBottom = "20px";
                 card.style.background = "rgba(15, 15, 22, 0.9)";
                 card.style.border = "1px solid rgba(255, 184, 0, 0.15)";
                 
+                // 使用 CSS 變數處理手機版與電腦版的內距適應
+                card.style.padding = "var(--card-padding, 20px)";
+                if (window.innerWidth <= 600) {
+                    card.style.padding = "16px"; // 手機版縮小內距，挪出更多空間
+                }
+                
                 // 🌟 狀態標籤樣式與配色邏輯
-                let statusColor = "#FF4646"; // 預設紅（待處理）
+                let statusColor = "#FF4646"; 
                 let statusBg = "rgba(255, 70, 70, 0.1)";
                 const currentStatus = order.status || "待處理";
 
                 if (currentStatus === "處理中") {
-                    statusColor = "#00A3FF"; // 藍
+                    statusColor = "#00A3FF"; 
                     statusBg = "rgba(0, 163, 255, 0.1)";
                 } else if (currentStatus === "已出貨") {
-                    statusColor = "#FFB800"; // 黃
+                    statusColor = "#FFB800"; 
                     statusBg = "rgba(255, 184, 0, 0.1)";
                 } else if (currentStatus === "已完成") {
-                    statusColor = "#00FF66"; // 綠
+                    statusColor = "#00FF66"; 
                     statusBg = "rgba(0, 255, 102, 0.1)";
                 }
                 
+                // 🌟 手機版優化排版：將頂部區塊改為 flex-wrap，並微調內部元件的最小寬度與排列
                 card.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255, 184, 0, 0.2); padding-bottom: 12px; margin-bottom: 15px;">
-                        <div>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255, 184, 0, 0.2); padding-bottom: 12px; margin-bottom: 15px; gap: 10px;">
+                        
+                        <div style="flex: 1; min-width: 120px;">
                             <span style="font-size: 0.75rem; color: #888; display: block; margin-bottom: 2px;">訂單流水號</span>
                             <strong style="color: #FFB800; font-family: monospace; font-size: 1.1rem;">#${order.orderId}</strong>
                         </div>
                         
-                        <div style="text-align: center; padding: 4px 12px; border: 1px solid ${statusColor}; background: ${statusBg}; border-radius: 4px; color: ${statusColor}; font-size: 0.85rem; font-weight: bold; letter-spacing: 1px; box-shadow: 0 0 10px ${statusBg};">
+                        <div style="text-align: center; padding: 5px 14px; border: 1px solid ${statusColor}; background: ${statusBg}; border-radius: 4px; color: ${statusColor}; font-size: 0.8rem; font-weight: bold; letter-spacing: 2px; box-shadow: 0 0 10px ${statusBg}; white-space: nowrap;">
                             ${currentStatus}
                         </div>
 
-                        <div style="text-align: right;">
+                        <div style="text-align: right; min-width: 140px; flex-grow: 1; text-align: right;">
                             <span style="font-size: 0.75rem; color: #888; display: block; margin-bottom: 2px;">時間戳記</span>
-                            <span style="color: #aaa; font-size: 0.9rem; font-family: monospace;">${order.date}</span>
+                            <span style="color: #aaa; font-size: 0.85rem; font-family: monospace;">${order.date}</span>
                         </div>
                     </div>
                     
-                    <div style="margin-bottom: 10px; line-height: 1.6;">
-                        <span style="color: #888; font-size: 0.9rem;">提取品項清單：</span><br>
-                        <strong style="color: #00A3FF; font-size: 1.05rem;">${order.items}</strong>
+                    <div style="margin-bottom: 12px; line-height: 1.6;">
+                        <span style="color: #888; font-size: 0.85rem;">提取品項清單：</span><br>
+                        <strong style="color: #00A3FF; font-size: 1rem; word-break: break-all;">${order.items}</strong>
                     </div>
 
-                    <div style="margin-bottom: 15px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.02); font-size: 0.85rem; color: #aaa;">
-                        <div><strong>收件人：</strong>${order.customerName}</div>
-                        <div><strong>聯絡電話：</strong>${order.phone}</div>
-                        <div><strong>配送通訊：</strong>${order.address}</div>
+                    <div style="margin-bottom: 15px; background: rgba(0,0,0,0.4); padding: 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.02); font-size: 0.8rem; color: #bbb; line-height: 1.7;">
+                        <div style="margin-bottom: 2px;"><strong>收件人：</strong>${order.customerName}</div>
+                        <div style="margin-bottom: 2px;"><strong>聯絡電話：</strong>${order.phone}</div>
+                        <div style="word-break: break-all;"><strong>配送通訊：</strong>${order.address}</div>
                     </div>
 
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;">
-                        <span style="font-size: 0.8rem; color: #555; font-family: monospace;">使用折扣碼: ${order.promoCode || 'NONE'}</span>
-                        <div>
-                            <span style="font-size: 0.85rem; color:#888; margin-right: 5px;">總計結算</span>
-                            <strong style="color: #FF4646; font-size: 1.4rem; font-family: monospace;">NT$ ${order.totalPrice}</strong>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; gap: 8px;">
+                        <span style="font-size: 0.75rem; color: #555; font-family: monospace;">使用折扣碼: ${order.promoCode || 'NONE'}</span>
+                        <div style="text-align: right;">
+                            <span style="font-size: 0.8rem; color:#888; margin-right: 5px;">總計結算</span>
+                            <strong style="color: #FF4646; font-size: 1.3rem; font-family: monospace;">NT$ ${order.totalPrice}</strong>
                         </div>
                     </div>
                 `;
                 
-                // 懸停動態效果美化
                 card.addEventListener("mouseenter", () => card.style.borderColor = "#FFB800");
                 card.addEventListener("mouseleave", () => card.style.borderColor = "rgba(255, 184, 0, 0.15)");
                 
