@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const API_URL = "https://script.google.com/macros/s/AKfycbxnY7cjEpEQVw1fniXITsiu5ElHkoStvbbZFQa12SsMAfiYehpAw5_0Q_MEntsK19njrw/exec"; 
+    const API_URL = "https://script.google.com/macros/s/AKfycbyupmB7DOZn13-bXwUTJ6Z0k_LLYBj-Crl8FiqJNBDSzcLk8geiQrk-Bth0eS5684hJfg/exec"; 
 
     // 購物車側邊欄切換元素
     const cartToggle = document.getElementById("cart-toggle");
@@ -308,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const finalPriceText = cartTotalText.textContent || cartTotalText.innerText;
 
         msgContainer.innerHTML = `
-            <p style="margin-bottom: 15px;">確認要送出這筆訂單嗎？</p>
+            <p style="margin-bottom: 15px;">訂單送出後即無法修改</p>
             <div style="color: #ccc; font-size: 0.85rem; text-align: left; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 6px; border: 1px solid rgba(255,70,70,0.2); line-height: 1.6;">
                 <strong>訂單資訊</strong><br>
                 帳號：${user.account}<br>
